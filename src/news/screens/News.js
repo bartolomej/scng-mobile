@@ -18,13 +18,13 @@ class News extends React.Component {
     };
   };
 
-  componentWillMount() {
+  componentDidMount() {
     fetchNews(this.props.dispatch)
   }
 
-  onRefresh() {
+  onRefresh = () => {
     fetchNews(this.props.dispatch);
-  }
+  };
 
   render() {
     return (
@@ -33,11 +33,12 @@ class News extends React.Component {
         refreshControl={
           <RefreshControl
             refreshing={this.props.news.isLoading}
-            onRefresh={this.onRefresh.bind(this)}
+            onRefresh={this.onRefresh}
           />
         }>
-        {this.props.news.news.map(news => (
+        {this.props.news.news.map((news, index) => (
           <NewsCard
+            key={index}
             onClick={() => this.goToArticle(news)}
             title={news.title}
             description={news.content}
