@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux'
 
 
@@ -13,8 +13,25 @@ class Article extends React.Component {
     return {
       style: { shadowColor: 'transparent' },
       headerTitle: 'Clanek',
+      headerRight: (
+        <TouchableOpacity
+          style={{margin: 10}}
+          onPress={() => {navigation.getParam('goToWeb')()}}>
+          <Text>Web</Text>
+        </TouchableOpacity>
+      ),
     };
   };
+
+  componentDidMount() {
+    this.props.navigation.setParams({
+      goToWeb: () => {
+        this.props.navigation.navigate('Web', {
+          href: this.props.navigation.state.params.article.href
+        });
+      }
+    });
+  }
 
   render() {
     const article = this.props.navigation.state.params.article;

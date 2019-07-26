@@ -1,5 +1,5 @@
 import React from 'react'
-import { RefreshControl, ScrollView, Text, StyleSheet } from 'react-native';
+import { RefreshControl, ScrollView, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux'
 
 import NewsCard from '../views/NewsCard';
@@ -15,11 +15,25 @@ class News extends React.Component {
     return {
       style: { shadowColor: 'transparent' },
       headerTitle: 'Novice',
+      headerRight: (
+        <TouchableOpacity
+          style={{margin: 10}}
+          onPress={() => {navigation.getParam('goToWeb')()}}>
+          <Text>Web</Text>
+        </TouchableOpacity>
+      ),
     };
   };
 
   componentDidMount() {
-    fetchNews(this.props.dispatch)
+    fetchNews(this.props.dispatch);
+    this.props.navigation.setParams({
+      goToWeb: () => {
+        this.props.navigation.navigate('Web', {
+          href: 'https://www.scng.si'
+        });
+      }
+    });
   }
 
   onRefresh = () => {
