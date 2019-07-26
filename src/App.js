@@ -4,7 +4,7 @@ import { Provider } from 'react-redux'
 import { createStore } from 'redux'
 import {rootReducer} from "./news/index";
 
-import NewsScreen from './news/screens/News';
+import Navigation from './navigation';
 
 const store = createStore(rootReducer);
 
@@ -12,7 +12,7 @@ export default () => {
 
   return (
     <Provider store={store}>
-      <NewsScreen/>
+      <Navigation/>
     </Provider>
   );
 }
