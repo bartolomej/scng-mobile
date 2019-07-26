@@ -9,8 +9,8 @@
  |   +-- news           -> news module
  |   +-- ...            -> more modules
  |   +-- App.js         -> app root
- |   +-- navigation.js  -> navigation root (wires modules together)
- |   +-- store.js       -> redux store root (wires modules reducers together)
+ |   +-- navigation.js  -> navigation root (wires module navigation together)
+ |   +-- store.js       -> redux store root (wires module reducers together)
  ``` 
  
  Code is organised into modules by feature.
