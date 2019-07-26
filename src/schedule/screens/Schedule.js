@@ -9,6 +9,13 @@ class Schedule extends React.Component {
     super(props);
   }
 
+  static navigationOptions = ({ navigation }) => {
+    return {
+      style: { shadowColor: 'transparent' },
+      headerTitle: 'Urnik',
+    };
+  };
+
   render() {
     return (
       <View>

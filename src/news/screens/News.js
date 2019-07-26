@@ -1,14 +1,65 @@
 import React from 'react'
-import { View, Text } from 'react-native';
+import { RefreshControl, ScrollView, Text, StyleSheet } from 'react-native';
 import { connect } from 'react-redux'
 
+import NewsCard from '../views/NewsCard';
+import {fetchNews} from "../actions";
 
-const News = ({dispatch}) => {
-  return (
-    <View>
-      <Text>News screen test</Text>
-    </View>
-  )
-};
+class News extends React.Component {
 
-export default connect()(News);
+  constructor(props) {
+    super(props);
+  }
+
+  static navigationOptions = ({ navigation }) => {
+    return {
+      style: { shadowColor: 'transparent' },
+      headerTitle: 'Novice',
+    };
+  };
+
+  componentWillMount() {
+    fetchNews(this.props.dispatch)
+  }
+
+  onRefresh() {
+    fetchNews(this.props.dispatch);
+  }
+
+  render() {
+    return (
+      <ScrollView
+        style={styles.container}
+        refreshControl={
+          <RefreshControl
+            refreshing={this.props.news.isLoading}
+            onRefresh={this.onRefresh.bind(this)}
+          />
+        }>
+        {this.props.news.news.map(news => (
+          <NewsCard
+            onClick={() => this.goToArticle(news)}
+            title={news.title}
+            description={news.content}
+            date={news.date}/>
+        ))}
+      </ScrollView>
+    )
+  }
+
+  goToArticle = news => {
+    this.props.navigation.navigate('Article', {
+      article: news
+    });
+  }
+}
+
+export default connect(state => ({news: state.news}))(News);
+
+
+const styles = StyleSheet.create({
+  container: {
+    height: '100%',
+    width: '100%'
+  }
+});

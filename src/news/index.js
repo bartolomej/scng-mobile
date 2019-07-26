@@ -1,23 +1,18 @@
-import { combineReducers } from 'redux';
 import {createStackNavigator, createAppContainer} from "react-navigation";
 
 import newsReducer from './reducers/news';
-import notificationReducer from './reducers/notification';
-import NotificationScreen from './screens/Notification';
+import ArticleScreen from './screens/Article';
 import NewsScreen from './screens/News';
 
 export const navigation = createAppContainer(
   createStackNavigator({
     News: NewsScreen,
-    Notification: {
-      screen: NotificationScreen,
+    Article: {
+      screen: ArticleScreen,
       mode: 'modal',
       headerMode: 'none'
-    }
+    },
   })
 );
 
-export const rootReducer = combineReducers({
-  news: newsReducer,
-  notifications: notificationReducer
-});
+export const rootReducer = newsReducer;

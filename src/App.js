@@ -1,12 +1,22 @@
 import React, { Component } from 'react';
 import { Provider } from 'react-redux'
+import { createStore, applyMiddleware, combineReducers } from 'redux'
+import { composeWithDevTools } from 'redux-devtools-extension';
+import logger from 'redux-logger';
 
-import { createStore } from 'redux'
-import {rootReducer} from "./news/index";
-
+import {rootReducer as rootNewsReducer} from "./news/index";
+import {rootReducer as rootScheduleReducer} from "./schedule/index";
 import Navigation from './navigation';
 
-const store = createStore(rootReducer);
+const store = createStore(
+  combineReducers({
+    news: rootNewsReducer,
+    schedule: rootScheduleReducer
+  }),
+  composeWithDevTools(
+    applyMiddleware(logger)
+  )
+);
 
 export default () => {
 
