@@ -1,10 +1,11 @@
+import {combineReducers} from 'redux';
 import {createAppContainer, createStackNavigator} from "react-navigation";
 
 import NotificationScreen from "./screens/Notification";
 import SettingsScreen from "./screens/Settings";
 import notificationReducer from "../news/reducers/news";
-// TODO: add settings reducer
-// import settingsReducer from "./reducers/settings";
+import settingsReducer from "./reducers/settings";
+
 
 export const navigation = createAppContainer(
   createStackNavigator({
@@ -17,4 +18,7 @@ export const navigation = createAppContainer(
   })
 );
 
-export const rootReducer = notificationReducer;
+export const rootReducer = combineReducers({
+  notification: notificationReducer,
+  settings: settingsReducer
+});

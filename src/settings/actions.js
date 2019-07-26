@@ -4,6 +4,9 @@ export const FETCH_NOTIFICATIONS_REQUEST = 'FETCH_NOTIFICATIONS_REQUEST';
 export const FETCH_NOTIFICATIONS_FAILURE = 'FETCH_NOTIFICATIONS_FAILURE';
 export const FETCH_NOTIFICATIONS_SUCCESS = 'FETCH_NOTIFICATIONS_SUCCESS';
 
+export const CHANGE_SELECTED_SCHOOL = 'CHANGE_SELECTED_SCHOOL';
+export const CHANGE_SELECTED_CLASS = 'CHANGE_SELECTED_CLASS';
+
 
 export const requestNotifications = () => {
   return {
@@ -23,6 +26,21 @@ export const requestNotificationsSuccess = response => {
   return {
     type: FETCH_NOTIFICATIONS_SUCCESS,
     response
+  }
+};
+
+
+export const changeSelectedSchool = school => {
+  return {
+    type: CHANGE_SELECTED_SCHOOL,
+    school
+  }
+};
+
+export const changeSelectedClass = schoolClass => {
+  return {
+    type: CHANGE_SELECTED_CLASS,
+    class: schoolClass
   }
 };
 

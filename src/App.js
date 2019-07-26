@@ -6,12 +6,14 @@ import logger from 'redux-logger';
 
 import {rootReducer as rootNewsReducer} from "./news/index";
 import {rootReducer as rootScheduleReducer} from "./schedule/index";
+import {rootReducer as rootSettingsReducer} from "./settings/index";
 import Navigation from './navigation';
 
 const store = createStore(
   combineReducers({
     news: rootNewsReducer,
-    schedule: rootScheduleReducer
+    schedule: rootScheduleReducer,
+    settings: rootSettingsReducer
   }),
   composeWithDevTools(
     applyMiddleware(logger)
