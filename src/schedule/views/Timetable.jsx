@@ -3,9 +3,7 @@ import moment from 'moment';
 import {View, TouchableOpacity, Text, StyleSheet} from 'react-native';
 
 
-export default ({dates, onDayChange}) => {
-
-  const [selected, setSelected] = useState(-1);
+export default ({dates, selected, onDayChange}) => {
 
   return (
     <View style={styles.container}>
@@ -16,7 +14,7 @@ export default ({dates, onDayChange}) => {
             index={index}
             date={date}
             onClick={(index, date) => {
-              setSelected(index);
+              onDayChange(index);
             }}
             selected={selected === index}
             current={false}/>

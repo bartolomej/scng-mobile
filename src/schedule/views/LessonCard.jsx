@@ -17,9 +17,10 @@ export default ({periodStart, periodEnd, shortName, fullName, classRoom, teacher
         </View>
         <View style={styles.rightContainer}>
           <Text style={styles.fullName}>{fullName}</Text>
+          {teacherName.length > 0 && classRoom.length > 0 &&
           <View style={styles.bottomTextWrapper}>
             <Text style={styles.textDetails}>{teacherName}, {classRoom}</Text>
-          </View>
+          </View>}
         </View>
       </View>
       {displayLine && <View style={styles.containerStyle}>

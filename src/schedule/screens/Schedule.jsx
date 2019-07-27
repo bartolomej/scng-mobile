@@ -1,6 +1,7 @@
 import React from 'react'
 import { RefreshControl, ScrollView } from 'react-native';
 import { connect } from 'react-redux'
+import moment from 'moment';
 
 import LessonCard from '../views/LessonCard';
 import {fetchSchedule} from "../actions";
@@ -11,6 +12,9 @@ class Schedule extends React.Component {
 
   constructor(props) {
     super(props);
+    this.state = {
+      selected: 0
+    }
   }
 
   static navigationOptions = ({ navigation }) => {
@@ -20,11 +24,30 @@ class Schedule extends React.Component {
     };
   };
 
+  componentDidMount() {
+    const {selected} = this.parseTimetableData(this.props.schedule.schedule);
+    this.setState({selected})
+  }
+
   onRefresh = () => {
     fetchSchedule(this.props.dispatch);
   };
+  
+  parseTimetableData = schedule => {
+    let dates = [];
+    let selected = 0;
+    for (let i = 0; i < schedule.length; i++) {
+      dates.push(schedule[i].date);
+      let diff = moment(schedule[i].date).diff(moment(), 'days');
+      if (diff === 0) {
+        selected = i;
+      }
+    }
+    return {dates, selected};
+  };
 
   render() {
+    const {dates} = this.parseTimetableData(this.props.schedule.schedule);
     const schedule = this.props.schedule.schedule;
 
     return (
@@ -35,16 +58,11 @@ class Schedule extends React.Component {
             refreshing={this.props.schedule.isLoading}
             onRefresh={this.onRefresh}/>
         }>
-        <Timetable dates={[
-          '2019-04-24T22:00:00.000Z',
-          '2019-04-25T22:00:00.000Z',
-          '2019-04-26T22:00:00.000Z',
-          '2019-04-27T22:00:00.000Z',
-          '2019-04-28T22:00:00.000Z',
-          '2019-04-29T22:00:00.000Z',
-          '2019-04-30T22:00:00.000Z'
-        ]}/>
-        {schedule !== null && schedule.lessons.map((ele, index) => {
+        <Timetable
+          dates={dates}
+          selected={this.state.selected}
+          onDayChange={selected => this.setState({selected})}/>
+        {schedule !== null && schedule[this.state.selected].lessons.map((ele, index) => {
           if (ele.groups.length === 0) return null;
           return <LessonCard
             key={index}

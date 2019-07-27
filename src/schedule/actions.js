@@ -29,7 +29,8 @@ export const requestScheduleSuccess = response => {
 
 export const fetchSchedule = (dispatch, classId) => {
   dispatch(requestSchedule());
-  fetch(`${host}/schedule/timetable/343294/25-04-2019`)
+  // TODO: remove test api call
+  fetch(`${host}/schedule/timetable/343294?startDate=25-04-2019&endDate=29-04-2019`)
     .then(res => res.json())
     .then(json => dispatch(requestScheduleSuccess(json)))
     .catch(error => dispatch(requestScheduleFailed(error)))
