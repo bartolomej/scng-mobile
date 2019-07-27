@@ -28,32 +28,27 @@ class Schedule extends React.Component {
   };
 
   render() {
+    const schedule = this.props.schedule.schedule;
+    console.log(this.props);
     return (
       <ScrollView
+        style={{flex: 1}}
         refreshControl={
           <RefreshControl
             refreshing={this.props.schedule.isLoading}
             onRefresh={this.onRefresh}
           />
         }>
-        <LessonCard
-          periodStart={'8:00'}
-          periodEnd={'9:00'}
-          teacherName={'B. Pregelj'}
-          shortName={'UME'}
-          classRoom={'E31'}/>
-        <LessonCard
-          periodStart={'8:00'}
-          periodEnd={'9:00'}
-          teacherName={'B. Pregelj'}
-          shortName={'UME'}
-          classRoom={'E31'}/>
-        <LessonCard
-          periodStart={'8:00'}
-          periodEnd={'9:00'}
-          teacherName={'B. Pregelj'}
-          shortName={'UME'}
-          classRoom={'E31'}/>
+        {schedule !== null && schedule.lessons.map((ele, index) => {
+          if (ele.groups.length === 0) return null;
+          return <LessonCard
+            key={index}
+            periodStart={ele.groups[0].start}
+            periodEnd={ele.groups[0].end}
+            teacherName={ele.groups[0].teacher}
+            shortName={ele.groups[0].shortName}
+            classRoom={ele.groups[0].classRoom}/>
+        })}
       </ScrollView>
     )
   }

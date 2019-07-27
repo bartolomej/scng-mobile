@@ -4,14 +4,15 @@ import {
   Text,
   StyleSheet
 } from 'react-native';
+import moment from 'moment';
 
 
 export default ({periodStart, periodEnd, shortName, classRoom, teacherName, group}) => {
   return (
     <View style={styles.container}>
       <View style={styles.leftContainer}>
-        <Text>{periodStart}</Text>
-        <Text>{periodEnd}</Text>
+        <Text>{moment(periodStart).format('HH:mm')}</Text>
+        <Text>{moment(periodEnd).format('HH:mm')}</Text>
       </View>
       <View style={styles.rightContainer}>
         <Text>{shortName}</Text>
@@ -24,6 +25,7 @@ export default ({periodStart, periodEnd, shortName, classRoom, teacherName, grou
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -36,6 +38,7 @@ const styles = StyleSheet.create({
     flexDirection: 'column'
   },
   rightContainer: {
-    flex: 2
+    flex: 2,
+    textAlign: 'center'
   }
 });

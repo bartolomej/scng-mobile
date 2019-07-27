@@ -1,4 +1,3 @@
-import { combineReducers } from 'redux';
 import {createStackNavigator, createAppContainer} from "react-navigation";
 
 import scheduleReducer from './reducers/schedule';
@@ -10,6 +9,4 @@ export const navigation = createAppContainer(
   })
 );
 
-export const rootReducer = combineReducers({
-  schedule: scheduleReducer,
-});
+export const rootReducer = scheduleReducer;

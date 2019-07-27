@@ -27,9 +27,9 @@ export const requestScheduleSuccess = response => {
 };
 
 
-export const fetchSchedule = dispatch => {
+export const fetchSchedule = (dispatch, classId) => {
   dispatch(requestSchedule());
-  fetch(`${host}/schedule`)
+  fetch(`${host}/schedule/timetable/343294/25-04-2019`)
     .then(res => res.json())
     .then(json => dispatch(requestScheduleSuccess(json)))
     .catch(error => dispatch(requestScheduleFailed(error)))
