@@ -2,19 +2,21 @@ import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 
 
-export default ({title, date, description, onClick}) => {
+export default ({title, date, description, onClick, style, displayLine = true}) => {
   return (
-    <TouchableOpacity onPress={onClick} style={styles.container}>
-      <View>
-        <Text style={styles.title}>{title}</Text>
-      </View>
-      <View>
-        <Text style={styles.description}>{description.substring(0, 80)} ...</Text>
-      </View>
-      <View>
-        <Text style={styles.date}>{date}</Text>
-      </View>
-    </TouchableOpacity>
+    <View>
+      <TouchableOpacity onPress={onClick} style={[styles.container, style]}>
+        <View>
+          <Text style={styles.title}>{title}</Text>
+        </View>
+        <View style={styles.descriptionWrapper}>
+          <Text style={styles.description}>{description.substring(0, 80)} ...</Text>
+        </View>
+      </TouchableOpacity>
+      {displayLine && <View style={styles.containerStyle}>
+        <View style={styles.dividerStyle} />
+      </View>}
+    </View>
   )
 }
 
@@ -24,27 +26,29 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     marginTop: 15,
     marginLeft: 10,
-    marginRight: 10
+    marginRight: 10,
+    marginBottom: 15
   },
   title: {
-    fontSize: 20,
+    fontSize: 18,
     fontWeight: '500'
   },
-  titleWrapper: {
-    padding: 15
-  },
   description: {
-    fontSize: 15,
+    fontSize: 13,
     fontStyle: 'italic'
   },
   descriptionWrapper: {
-    padding: 5
+    paddingTop: 5,
+    paddingBottom: 5
   },
-  date: {
-    fontSize: 10,
-    fontWeight: '300',
+  containerStyle: {
+    width: '100%',
+    height: 1,
+    backgroundColor: 'rgb(255,255,255)',
   },
-  dateWrapper: {
-
-  }
+  dividerStyle: {
+    width: '100%',
+    height: '100%',
+    backgroundColor: 'rgb(220,220,223)',
+  },
 });

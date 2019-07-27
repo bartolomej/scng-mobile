@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { ScrollView, View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux'
 
 
@@ -36,10 +36,14 @@ class Article extends React.Component {
   render() {
     const article = this.props.navigation.state.params.article;
     return (
-      <View style={styles.container}>
-        <Text style={styles.title}>{article.title}</Text>
-        <Text style={styles.description}>{article.content}</Text>
-      </View>
+      <ScrollView style={styles.container}>
+        <View style={styles.titleWrapper}>
+          <Text style={styles.title}>{article.title}</Text>
+        </View>
+        <View style={styles.descriptionWrapper}>
+          <Text style={styles.description}>{article.content}</Text>
+        </View>
+      </ScrollView>
     )
   }
 }
@@ -49,14 +53,22 @@ export default connect()(Article);
 
 const styles = StyleSheet.create({
   container: {
-
+    flex: 1
   },
   title: {
     fontSize: 20,
-    fontWeight: '500'
+    fontWeight: '500',
+    textAlign: 'center'
+  },
+  titleWrapper: {
+    padding: 20
   },
   description: {
     fontSize: 15,
+    lineHeight: 25,
     fontStyle: 'italic'
+  },
+  descriptionWrapper: {
+    padding: 20
   }
 });

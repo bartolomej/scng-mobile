@@ -56,6 +56,7 @@ class News extends React.Component {
             onClick={() => this.goToArticle(news)}
             title={news.title}
             description={news.content}
+            displayLine={index+1 !== this.props.news.news.length}
             date={news.date}/>
         ))}
       </ScrollView>
