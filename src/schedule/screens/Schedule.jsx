@@ -19,17 +19,13 @@ class Schedule extends React.Component {
     };
   };
 
-  componentDidMount() {
-    fetchSchedule(this.props.dispatch);
-  }
-
   onRefresh = () => {
     fetchSchedule(this.props.dispatch);
   };
 
   render() {
     const schedule = this.props.schedule.schedule;
-    console.log(this.props);
+
     return (
       <ScrollView
         style={{flex: 1}}

@@ -3,23 +3,28 @@ import moment from 'moment';
 import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
 
 
-export default ({title, shortDescription, description, date}) => {
+export default ({title, shortDescription, description, date, displayLine = true}) => {
   let duration = moment.duration(moment().diff(moment(date)));
   let days = Math.round(duration.asDays());
   return (
-    <TouchableOpacity style={styles.smallContainer}>
-      <View>
-        <View style={styles.leftInnerContainer}>
-          <Text style={styles.title}>{title}</Text>
+    <View>
+      <TouchableOpacity style={styles.smallContainer}>
+        <View>
+          <View style={styles.leftInnerContainer}>
+            <Text style={styles.title}>{title}</Text>
+          </View>
+          <View style={styles.rightInnerContainer}>
+            <Text>{shortDescription}</Text>
+          </View>
         </View>
-        <View style={styles.rightInnerContainer}>
-          <Text>{shortDescription}</Text>
+        <View>
+          <Text>{days} {days > 1 ? 'days' : 'day'} ago</Text>
         </View>
-      </View>
-      <View>
-        <Text>{days} {days > 1 ? 'days' : 'day'} ago</Text>
-      </View>
-    </TouchableOpacity>
+      </TouchableOpacity>
+      {displayLine && <View style={styles.containerStyle}>
+        <View style={styles.dividerStyle} />
+      </View>}
+    </View>
   )
 }
 
@@ -30,7 +35,8 @@ const styles = StyleSheet.create({
     alignSelf: 'stretch',
     textAlign: 'center',
     flexDirection: 'row',
-    marginTop: 20,
+    marginTop: 10,
+    marginBottom: 10,
     marginRight: 20,
     marginLeft: 20
   },
@@ -41,12 +47,22 @@ const styles = StyleSheet.create({
     flexDirection: 'column'
   },
   title: {
-    fontWeight: '400',
+    fontWeight: '500',
   },
   subtitle: {
 
   },
   date: {
 
-  }
+  },
+  containerStyle: {
+    width: '100%',
+    height: 1,
+    backgroundColor: 'rgb(255,255,255)',
+  },
+  dividerStyle: {
+    width: '100%',
+    height: '100%',
+    backgroundColor: 'rgb(220,220,223)',
+  },
 });

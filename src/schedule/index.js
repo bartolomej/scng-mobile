@@ -2,6 +2,7 @@ import {createStackNavigator, createAppContainer} from "react-navigation";
 
 import scheduleReducer from './reducers/schedule';
 import ScheduleScreen from './screens/Schedule';
+import {fetchSchedule} from './actions';
 
 export const navigation = createAppContainer(
   createStackNavigator({
@@ -10,3 +11,5 @@ export const navigation = createAppContainer(
 );
 
 export const rootReducer = scheduleReducer;
+
+export const fetchState = dispatch => fetchSchedule(dispatch);

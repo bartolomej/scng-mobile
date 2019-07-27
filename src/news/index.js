@@ -4,7 +4,7 @@ import newsReducer from './reducers/news';
 import ArticleScreen from './screens/Article';
 import NewsScreen from './screens/News';
 import WebScreen from './screens/Web';
-
+import {fetchNews} from './actions';
 
 export const navigation = createAppContainer(
   createStackNavigator({
@@ -19,3 +19,5 @@ export const navigation = createAppContainer(
 );
 
 export const rootReducer = newsReducer;
+
+export const fetchState = dispatch => fetchNews(dispatch);

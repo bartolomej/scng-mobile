@@ -26,7 +26,6 @@ class News extends React.Component {
   };
 
   componentDidMount() {
-    fetchNews(this.props.dispatch);
     this.props.navigation.setParams({
       goToWeb: () => {
         this.props.navigation.navigate('Web', {

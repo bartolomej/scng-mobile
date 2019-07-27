@@ -5,6 +5,7 @@ import NotificationScreen from "./screens/Notification";
 import SettingsScreen from "./screens/Settings";
 import notificationReducer from "./reducers/notification";
 import settingsReducer from "./reducers/settings";
+import {fetchNotifications, fetchSchools} from './actions';
 
 
 export const navigation = createAppContainer(
@@ -22,3 +23,8 @@ export const rootReducer = combineReducers({
   notification: notificationReducer,
   settings: settingsReducer
 });
+
+export const fetchState = dispatch => {
+  fetchSchools(dispatch);
+  fetchNotifications(dispatch);
+};

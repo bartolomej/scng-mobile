@@ -41,9 +41,6 @@ class Settings extends React.Component {
   };
 
   async componentDidMount() {
-    await this.getSchools();
-    fetchNotifications(this.props.dispatch);
-
     this.props.navigation.setParams({
       goToNotification: () => {
         this.props.navigation.navigate('Notification');
@@ -117,15 +114,13 @@ class Settings extends React.Component {
         />
         <SettingsDividerShort />
         {notifications.map((ele, index) => (
-          <View>
-            <NotificationCard
-              key={index}
-              title={ele.title}
-              shortDescription={ele.shortDescription}
-              description={ele.description}
-              date={ele.date}/>
-            <SettingsDividerShort />
-          </View>
+          <NotificationCard
+            key={index}
+            title={ele.title}
+            shortDescription={ele.shortDescription}
+            description={ele.description}
+            displayLine={index+1 !== notifications.length}
+            date={ele.date}/>
         ))}
       </ScrollView>
     )
