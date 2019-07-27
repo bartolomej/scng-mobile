@@ -51,6 +51,7 @@ class Schedule extends React.Component {
             periodStart={ele.groups[0].start}
             periodEnd={ele.groups[0].end}
             teacherName={ele.groups[0].teacher}
+            fullName={ele.groups[0].fullName}
             shortName={ele.groups[0].shortName}
             classRoom={ele.groups[0].classRoom}/>
         })}
