@@ -34,11 +34,9 @@ const styles = StyleSheet.create({
     marginRight: 10
   },
   leftContainer: {
-    flex: 1,
     flexDirection: 'column'
   },
   rightContainer: {
-    flex: 2,
     textAlign: 'center'
   }
 });

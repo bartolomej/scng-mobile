@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 
 import LessonCard from '../views/LessonCard';
 import {fetchSchedule} from "../actions";
+import Timetable from '../views/Timetable';
 
 
 class Schedule extends React.Component {
@@ -32,9 +33,17 @@ class Schedule extends React.Component {
         refreshControl={
           <RefreshControl
             refreshing={this.props.schedule.isLoading}
-            onRefresh={this.onRefresh}
-          />
+            onRefresh={this.onRefresh}/>
         }>
+        <Timetable dates={[
+          '2019-04-24T22:00:00.000Z',
+          '2019-04-25T22:00:00.000Z',
+          '2019-04-26T22:00:00.000Z',
+          '2019-04-27T22:00:00.000Z',
+          '2019-04-28T22:00:00.000Z',
+          '2019-04-29T22:00:00.000Z',
+          '2019-04-30T22:00:00.000Z'
+        ]}/>
         {schedule !== null && schedule.lessons.map((ele, index) => {
           if (ele.groups.length === 0) return null;
           return <LessonCard
