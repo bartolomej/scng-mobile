@@ -3,7 +3,7 @@ import {createAppContainer, createStackNavigator} from "react-navigation";
 
 import NotificationScreen from "./screens/Notification";
 import SettingsScreen from "./screens/Settings";
-import notificationReducer from "../news/reducers/news";
+import notificationReducer from "./reducers/notification";
 import settingsReducer from "./reducers/settings";
 
 

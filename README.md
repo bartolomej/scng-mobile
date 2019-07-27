@@ -54,6 +54,16 @@ export const rootReducer = combineReducers({
  Builds android app in the development mode.<br>
  You need Android Studio configured, with emulator running in the background.
  
+ ## TODO LIST
+ - [ ] implement convenient error handling system
+ - [ ] implement 'solska hrana' module
+ - [ ] implement logger service (sends analytics data to backend)
+ - [ ] feedback screen (send reviews,..)
+ - [ ] contact screen (get in contact, contribute to scng apps)
+ - [ ] implement consistent view components with styles
+ - [ ] integrate react-native-vector-icons library
+ - [ ] integrate redux-persist library
+ - [ ] add intro guides screen
 
 ### Useful resources
 - debugging (https://facebook.github.io/react-native/docs/debugging)

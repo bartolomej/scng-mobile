@@ -1,5 +1,5 @@
 import React from 'react'
-import { ScrollView, Text, TouchableOpacity, Platform, RefreshControl } from 'react-native';
+import { ScrollView, View, Text, TouchableOpacity, Platform, RefreshControl } from 'react-native';
 import { connect } from 'react-redux'
 import {
   SettingsDividerShort,
@@ -12,7 +12,8 @@ import {
 
 import {fetchSchools, fetchClasses} from "../actions";
 import {changeSelectedClass, changeSelectedSchool} from "../actions";
-import {fetchNews} from "../../news/actions";
+import NotificationCard from '../views/NotificationCard';
+import {fetchNotifications} from "../actions";
 
 
 class Settings extends React.Component {
@@ -20,8 +21,8 @@ class Settings extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      school: null,
-      classes: null
+      school: [],
+      classes: []
     }
   }
 
@@ -41,6 +42,8 @@ class Settings extends React.Component {
 
   async componentDidMount() {
     await this.getSchools();
+    fetchNotifications(this.props.dispatch);
+
     this.props.navigation.setParams({
       goToNotification: () => {
         this.props.navigation.navigate('Notification');
@@ -50,6 +53,7 @@ class Settings extends React.Component {
 
   onRefresh = async () => {
     await this.getSchools();
+    fetchNotifications(this.props.dispatch);
   };
 
   getSchools = async () => {
@@ -69,13 +73,14 @@ class Settings extends React.Component {
   };
 
   render() {
-    const {isLoading, selectedSchool, selectedClass} = this.props.settings.settings;
+    const {selectedSchool, selectedClass} = this.props.settings;
+    const {notifications} = this.props.notification;
     return (
       <ScrollView
         style={{flex: 1}}
         refreshControl={
           <RefreshControl
-            refreshing={isLoading}
+            refreshing={this.props.settings.isLoading || this.props.notification.isLoading}
             onRefresh={this.onRefresh}
           />
         }>
@@ -107,16 +112,30 @@ class Settings extends React.Component {
           styleModalButtonsText={{ color: colors.monza }}
         />
         <SettingsCategoryHeader
-          title={"Drugo"}
+          title={"Obvestila"}
           textStyle={Platform.OS === "android" ? { color: colors.monza } : null}
         />
         <SettingsDividerShort />
+        {notifications.map((ele, index) => (
+          <View>
+            <NotificationCard
+              key={index}
+              title={ele.title}
+              shortDescription={ele.shortDescription}
+              description={ele.description}
+              date={ele.date}/>
+            <SettingsDividerShort />
+          </View>
+        ))}
       </ScrollView>
     )
   }
 }
 
-export default connect(state => ({settings: state.settings}))(Settings);
+export default connect(state => ({
+  settings: state.settings.settings,
+  notification: state.settings.notification
+}))(Settings);
 
 
 const colors = {

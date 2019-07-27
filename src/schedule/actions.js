@@ -1,4 +1,5 @@
 import fetch from 'cross-fetch';
+import {host} from '../../app.json';
 
 export const FETCH_SCHEDULE_REQUEST = 'FETCH_SCHEDULE_REQUEST';
 export const FETCH_SCHEDULE_FAILURE = 'FETCH_SCHEDULE_FAILURE';
@@ -28,7 +29,7 @@ export const requestScheduleSuccess = response => {
 
 export const fetchSchedule = dispatch => {
   dispatch(requestSchedule());
-  fetch('http://localhost:3000/schedule')
+  fetch(`${host}/schedule`)
     .then(res => res.json())
     .then(json => dispatch(requestScheduleSuccess(json)))
     .catch(error => dispatch(requestScheduleFailed(error)))

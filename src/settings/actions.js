@@ -70,7 +70,7 @@ export const requestSuccess = () => {
 
 export const fetchNotifications = dispatch => {
   dispatch(requestNotifications());
-  fetch(`${host}/notifications`)
+  fetch(`${host}/user/notification`)
     .then(res => res.json())
     .then(json => dispatch(requestNotificationsSuccess(json)))
     .catch(error => dispatch(requestNotificationsFailed(error)))

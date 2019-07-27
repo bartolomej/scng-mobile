@@ -1,4 +1,5 @@
 import fetch from 'cross-fetch';
+import {host} from '../../app.json';
 
 export const FETCH_NEWS_REQUEST = 'FETCH_NEWS_REQUEST';
 export const FETCH_NEWS_FAILURE = 'FETCH_NEWS_FAILURE';
@@ -28,7 +29,7 @@ export const requestNewsSuccess = response => {
 
 export const fetchNews = dispatch => {
   dispatch(requestNews());
-  fetch('http://localhost:3000/news')
+  fetch(`${host}/news`)
     .then(res => res.json())
     .then(json => dispatch(requestNewsSuccess(json)))
     .catch(error => dispatch(requestNewsFailed(error)))
