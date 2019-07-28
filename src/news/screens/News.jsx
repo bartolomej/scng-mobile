@@ -1,5 +1,6 @@
 import React from 'react'
 import { RefreshControl, ScrollView, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import { connect } from 'react-redux'
 
 import NewsCard from '../views/NewsCard';
@@ -20,7 +21,7 @@ class News extends React.Component {
         <TouchableOpacity
           style={{margin: 10}}
           onPress={() => {navigation.getParam('goToWeb')()}}>
-          <Text>Web</Text>
+          <Icon name="web" size={22} color={'black'} />
         </TouchableOpacity>
       ),
     };

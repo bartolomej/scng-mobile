@@ -1,5 +1,6 @@
 import React from 'react'
 import { ScrollView, View, Text, TouchableOpacity, Platform, RefreshControl } from 'react-native';
+import Icon from "react-native-vector-icons/AntDesign";
 import { connect } from 'react-redux'
 import {
   SettingsDividerShort,
@@ -34,14 +35,14 @@ class Settings extends React.Component {
         <TouchableOpacity
           style={{margin: 10}}
           onPress={() => {navigation.getParam('goToNotification')()}}>
-          <Text>N</Text>
+          <Icon name="infocirlceo" size={22} color={'black'} />
         </TouchableOpacity>
       ),
       headerLeft: (
         <TouchableOpacity
           style={{margin: 10}}
           onPress={() => {navigation.getParam('goToReport')()}}>
-          <Text>R</Text>
+          <Icon name="message1" size={22} color={'black'} />
         </TouchableOpacity>
       ),
     };
