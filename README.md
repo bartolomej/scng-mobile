@@ -26,7 +26,7 @@
 export const navigation = createAppContainer(
   createStackNavigator({
     News: NewsScreen,
-    Notification: {
+    Information: {
       screen: NotificationScreen,
       mode: 'modal',
       headerMode: 'none'

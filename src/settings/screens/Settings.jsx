@@ -37,6 +37,13 @@ class Settings extends React.Component {
           <Text>N</Text>
         </TouchableOpacity>
       ),
+      headerLeft: (
+        <TouchableOpacity
+          style={{margin: 10}}
+          onPress={() => {navigation.getParam('goToReport')()}}>
+          <Text>R</Text>
+        </TouchableOpacity>
+      ),
     };
   };
 
@@ -45,6 +52,9 @@ class Settings extends React.Component {
     this.props.navigation.setParams({
       goToNotification: () => {
         this.props.navigation.navigate('Notification');
+      },
+      goToReport: () => {
+        this.props.navigation.navigate('Report');
       }
     });
   }
