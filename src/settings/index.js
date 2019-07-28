@@ -1,8 +1,9 @@
 import {combineReducers} from 'redux';
 import {createAppContainer, createStackNavigator} from "react-navigation";
 
-import NotificationScreen from "./screens/Notification";
+import InfoScreen from "./screens/Information";
 import SettingsScreen from "./screens/Settings";
+import ReportScreen from './screens/Report';
 import notificationReducer from "./reducers/notification";
 import settingsReducer from "./reducers/settings";
 import {fetchNotifications, fetchSchools} from './actions';
@@ -11,8 +12,9 @@ import {fetchNotifications, fetchSchools} from './actions';
 export const navigation = createAppContainer(
   createStackNavigator({
     Settings: SettingsScreen,
+    Report: ReportScreen,
     Notification: {
-      screen: NotificationScreen,
+      screen: InfoScreen,
       mode: 'modal',
       headerMode: 'none'
     },

@@ -93,3 +93,18 @@ export const fetchClasses = (dispatch, schoolId) => {
       .catch(error => dispatch(requestFailed(error)))
   });
 };
+
+export const postFeedback = (type, description, classId) => {
+  return new Promise((resolve, reject) => {
+    fetch(`${host}/user/feedback`, {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({type, description, classId})})
+      .then(res => res.json())
+      .then(json => resolve(json))
+      .catch(error => reject(error))
+  });
+};
