@@ -11,7 +11,7 @@ export default ({logo, school, title, date, description, onClick, style, display
       <TouchableOpacity onPress={onClick} style={[styles.container, style]}>
         <View style={styles.leftContainer}>
           <Image
-            style={{width: 50, height: 50}}
+            style={{aspectRatio: 1, width: 50, resizeMode: 'contain'}}
             source={{uri: logo}}
           />
         </View>
