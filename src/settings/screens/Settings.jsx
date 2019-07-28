@@ -118,7 +118,6 @@ class Settings extends React.Component {
           <NotificationCard
             key={index}
             title={ele.title}
-            shortDescription={ele.shortDescription}
             description={ele.description}
             displayLine={index+1 !== notifications.length}
             date={ele.date}/>

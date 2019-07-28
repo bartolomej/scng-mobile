@@ -3,22 +3,17 @@ import moment from 'moment';
 import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
 
 
-export default ({title, shortDescription, description, date, displayLine = true}) => {
+export default ({title, description, date, displayLine = true}) => {
   let duration = moment.duration(moment().diff(moment(date)));
   let days = Math.round(duration.asDays());
   return (
     <View>
       <TouchableOpacity style={styles.smallContainer}>
-        <View>
-          <View style={styles.leftInnerContainer}>
-            <Text style={styles.title}>{title}</Text>
-          </View>
-          <View style={styles.rightInnerContainer}>
-            <Text>{shortDescription}</Text>
-          </View>
+        <View style={styles.leftInnerContainer}>
+          <Text style={styles.title}>{title}</Text>
         </View>
         <View>
-          <Text>{days} {days > 1 ? 'days' : 'day'} ago</Text>
+          <Text style={styles.date}>{days} {days > 1 ? 'dni' : 'dan'} nazaj</Text>
         </View>
       </TouchableOpacity>
       {displayLine && <View style={styles.containerStyle}>
@@ -53,7 +48,7 @@ const styles = StyleSheet.create({
 
   },
   date: {
-
+    color: 'grey'
   },
   containerStyle: {
     width: '100%',
