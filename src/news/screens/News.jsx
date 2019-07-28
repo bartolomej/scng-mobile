@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 
 import NewsCard from '../views/NewsCard';
 import {fetchNews} from "../actions";
+import {host} from '../../../app.json';
 
 class News extends React.Component {
 
@@ -54,6 +55,8 @@ class News extends React.Component {
             key={index}
             onClick={() => this.goToArticle(news)}
             title={news.title}
+            logo={host + news.school.logo}
+            school={news.school.name}
             description={news.content}
             displayLine={index+1 !== this.props.news.news.length}
             date={news.date}/>
