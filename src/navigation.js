@@ -14,7 +14,7 @@ const bottomTabNavigation = createBottomTabNavigator(
       screen: newsNavigation,
       navigationOptions: {
         tabBarIcon: ({ tintColor }) => (
-          <Icon name="newspaper-o" size={22} color={tintColor} />
+          <Icon name="newspaper-o" size={20} color={tintColor} />
         )
       }
     },
@@ -22,7 +22,7 @@ const bottomTabNavigation = createBottomTabNavigator(
       screen: scheduleNavigation,
       navigationOptions: {
         tabBarIcon: ({ tintColor }) => (
-          <Icon name="calendar" size={22} color={tintColor} />
+          <Icon name="calendar" size={20} color={tintColor} />
         )
       }
     },
@@ -30,10 +30,22 @@ const bottomTabNavigation = createBottomTabNavigator(
       screen: settingsNavigation,
       navigationOptions: {
         tabBarIcon: ({ tintColor }) => (
-          <Icon2 name="more-horizontal" size={22} color={tintColor} />
+          <Icon2 name="more-horizontal" size={20} color={tintColor} />
         )
       }
     },
+  },
+  {
+    defaultNavigationOptions: ({ navigation }) => ({
+      tabBarOptions: {
+        showLabel: true,
+        activeTintColor: 'orange',
+        inactiveTintColor: 'grey',
+        style: {
+          backgroundColor: 'black',
+        }
+      }
+    })
   }
 );
 

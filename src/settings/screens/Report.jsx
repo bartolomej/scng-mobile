@@ -22,7 +22,9 @@ class Report extends React.Component {
 
   static navigationOptions = ({ navigation }) => {
     return {
-      style: { shadowColor: 'transparent' },
+      headerStyle: {
+        borderBottomWidth: 0
+      },
       headerTitle: 'Povratne info.',
     };
   };

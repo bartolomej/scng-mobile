@@ -3,20 +3,23 @@ import moment from 'moment';
 import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
 
 
-export default ({title, description, date, displayLine = true}) => {
+export default ({title, description, date, displayTopLine = true, displayBottomLine = true}) => {
   let duration = moment.duration(moment().diff(moment(date)));
   let days = Math.round(duration.asDays());
   return (
     <View>
-      <TouchableOpacity style={styles.smallContainer}>
-        <View style={styles.leftInnerContainer}>
-          <Text style={styles.title}>{title}</Text>
+      {displayTopLine && <View style={styles.containerStyle}>
+        <View style={styles.dividerStyle} />
+      </View>}
+      <TouchableOpacity style={styles.container}>
+        <View style={{flex: 1}}>
+          <Text style={{fontWeight: '500'}}>{title}</Text>
         </View>
-        <View>
+        <View style={{flex: 1}}>
           <Text style={styles.date}>{days} {days > 1 ? 'dni' : 'dan'} nazaj</Text>
         </View>
       </TouchableOpacity>
-      {displayLine && <View style={styles.containerStyle}>
+      {displayBottomLine && <View style={styles.containerStyle}>
         <View style={styles.dividerStyle} />
       </View>}
     </View>
@@ -24,31 +27,14 @@ export default ({title, description, date, displayLine = true}) => {
 }
 
 const styles = StyleSheet.create({
-  smallContainer: {
+  container: {
     flex: 1,
-    justifyContent: 'space-between',
-    alignSelf: 'stretch',
-    textAlign: 'center',
     flexDirection: 'row',
-    marginTop: 10,
-    marginBottom: 10,
-    marginRight: 20,
-    marginLeft: 20
-  },
-  leftInnerContainer: {
-
-  },
-  rightInnerContainer: {
-    flexDirection: 'column'
-  },
-  title: {
-    fontWeight: '500',
-  },
-  subtitle: {
-
+    margin: 16
   },
   date: {
-    color: 'grey'
+    color: 'grey',
+    textAlign: 'right'
   },
   containerStyle: {
     width: '100%',

@@ -27,7 +27,9 @@ class Settings extends React.Component {
 
   static navigationOptions = ({ navigation }) => {
     return {
-      style: { shadowColor: 'transparent' },
+      headerStyle: {
+        borderBottomWidth: 0
+      },
       headerTitle: 'Vec',
       headerRight: (
         <TouchableOpacity
@@ -95,7 +97,7 @@ class Settings extends React.Component {
           title={"Nastavitve"}
           textStyle={Platform.OS === "android" ? { color: colors.monza } : null}
         />
-        <SettingsDividerShort />
+        {/*<SettingsDividerShort /> // TODO: implement modal selector
         <SettingsPicker
           title="Sola"
           dialogDescription={"Izberi solo."}
@@ -118,17 +120,27 @@ class Settings extends React.Component {
           value={selectedClass}
           styleModalButtonsText={{ color: colors.monza }}
         />
-        <SettingsDividerShort />
+        <SettingsDividerShort />*/}
         <ValuePicker
+          displayTopLine={true}
+          displayBottomLine={false}
+          title={'Sola'}/>
+        <ValuePicker
+          displayTopLine={true}
+          displayBottomLine={false}
+          title={'Razred'}/>
+        <ValuePicker
+          displayTopLine={true}
+          displayBottomLine={false}
           title={'Tema'}/>
         <SettingsCategoryHeader
           title={"Obvestila"}
           textStyle={Platform.OS === "android" ? { color: colors.monza } : null}
         />
-        <SettingsDividerShort />
         {notifications.map((ele, index) => (
           <NotificationCard
             key={index}
+            displayBottomLine={false}
             title={ele.title}
             description={ele.description}
             displayLine={index+1 !== notifications.length}

@@ -2,12 +2,15 @@ import React, {useState} from 'react';
 import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
 
 
-export default ({title, displayLine = true}) => {
+export default ({title, displayBottomLine = true, displayTopLine = true, items}) => {
 
   const [value, setValue] = useState('...');
 
   return (
     <View>
+      {displayTopLine && <View style={styles.containerStyle}>
+        <View style={styles.dividerStyle} />
+      </View>}
       <TouchableOpacity style={styles.container}>
         {/*<PickerModal
           closeModal={this.closeModal}
@@ -29,7 +32,7 @@ export default ({title, displayLine = true}) => {
           <Text style={styles.value}>{value}</Text>
         </View>
       </TouchableOpacity>
-      {displayLine && <View style={styles.containerStyle}>
+      {displayBottomLine && <View style={styles.containerStyle}>
         <View style={styles.dividerStyle} />
       </View>}
     </View>
@@ -40,7 +43,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: 'row',
-    margin: 20
+    padding: 16
   },
   titleContainer: {
     flex: 1,
@@ -50,7 +53,7 @@ const styles = StyleSheet.create({
     alignItems: 'flex-end'
   },
   title: {
-    fontSize: 15
+    fontSize: 14
   },
   value: {
 

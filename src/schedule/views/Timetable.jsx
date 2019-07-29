@@ -47,8 +47,8 @@ const DayIcon = ({date, onClick, selected, index}) => {
       onPress={() => {
         onClick(index, date);
       }}>
-      <Text styles={selected ? dayStyles.dayTextSelected : dayStyles.dayText}>{weekDays[weekDay]}</Text>
-      <View>
+      <View style={{alignItems: 'center', justifyContent: 'center'}}>
+        <Text style={selected ? dayStyles.dayTextSelected : dayStyles.dayText}>{weekDays[weekDay]}</Text>
         <Text style={selected ? dayStyles.dayNumberSelected : dayStyles.dayNumber}>{monthDay}</Text>
       </View>
     </TouchableOpacity>
@@ -58,7 +58,10 @@ const DayIcon = ({date, onClick, selected, index}) => {
 const dayStyles = StyleSheet.create({
   container: {
     flexDirection: 'column',
-    margin: 10
+    margin: 20,
+    marginBottom: 0,
+    paddingBottom: 10,
+    marginTop: 5
   },
   dayNumber: {
     fontSize: 15,
@@ -67,15 +70,17 @@ const dayStyles = StyleSheet.create({
   },
   dayNumberSelected: {
     fontSize: 20,
-    fontWeight: '500',
+    color: 'orange',
+    fontWeight: '600',
     textAlign: 'center'
   },
   dayText: {
-    fontSize: 1,
+    fontSize: 10,
     textAlign: 'center'
   },
   dayTextSelected: {
-    fontSize: 2,
+    color: 'orange',
+    fontSize: 10,
     textAlign: 'center'
   },
   dayNumberWrapper: {}

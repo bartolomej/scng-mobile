@@ -34,7 +34,8 @@ const styles = StyleSheet.create({
     fontSize: 20,
     margin: 20,
     fontWeight: '500',
-    textAlign: 'center'
+    textAlign: 'center',
+    color: 'orange'
   },
   description: {
     fontSize: 15,

@@ -15,11 +15,16 @@ class News extends React.Component {
 
   constructor(props) {
     super(props);
+    this.state = {
+      showBorder: false
+    }
   }
 
   static navigationOptions = ({ navigation }) => {
     return {
-      style: { shadowColor: 'transparent' },
+      headerStyle: {
+        borderBottomWidth: navigation.getParam('showBorder') ? 1 : 0 // TODO: dynamically show border on scroll
+      },
       headerTitle: 'Novice',
       headerRight: (
         <TouchableOpacity
@@ -37,7 +42,8 @@ class News extends React.Component {
         this.props.navigation.navigate('Web', {
           href: 'https://www.scng.si'
         });
-      }
+      },
+      showBorder: this.state.showBorder
     });
   }
 
@@ -49,6 +55,7 @@ class News extends React.Component {
     return (
       <ScrollView
         style={styles.container}
+        onScroll={() => this.setState({showBorder: true})}
         refreshControl={
           <RefreshControl
             refreshing={this.props.news.isLoading}

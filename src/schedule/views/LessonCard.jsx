@@ -8,6 +8,7 @@ import moment from 'moment';
 
 
 export default ({periodStart, periodEnd, shortName, fullName, classRoom, teacherName, group, displayLine = true}) => {
+  let isCurrent = moment().isBetween(moment(periodStart), moment(periodEnd));
   return (
     <View>
       <View style={styles.container}>
@@ -19,7 +20,7 @@ export default ({periodStart, periodEnd, shortName, fullName, classRoom, teacher
           style={{
             flex: 0.4,
             borderLeftWidth: 1,
-            borderLeftColor: 'grey',
+            borderLeftColor: 'orange',
           }}
         />
         <View style={styles.rightContainer}>
@@ -55,15 +56,15 @@ const styles = StyleSheet.create({
     justifyContent: 'center'
   },
   rightContainer: {
-    flex: 3,
-    textAlign: 'center'
+    flex: 4,
+    textAlign: 'center',
+    justifyContent: 'center'
   },
   bottomTextWrapper: {
     paddingTop: 2,
     flexDirection: 'row',
     justifyContent: 'space-between'
   },
-
   textDetails: {
     textAlign: 'right'
   },
@@ -79,7 +80,7 @@ const styles = StyleSheet.create({
   },
   fullName: {
     paddingBottom: 2,
-    fontSize: 13,
+    fontSize: 14,
     fontWeight: '500',
     textAlign: 'left'
   },
