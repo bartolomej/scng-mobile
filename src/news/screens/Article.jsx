@@ -1,8 +1,10 @@
 import React from 'react'
-import { ScrollView, View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import {ScrollView, View, Text, StyleSheet, TouchableOpacity, Image} from 'react-native';
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import { connect } from 'react-redux'
 import moment from 'moment';
+
+import {host} from '../../../app.json';
 
 
 class Article extends React.Component {
@@ -45,7 +47,13 @@ class Article extends React.Component {
       <ScrollView style={styles.container}>
         <View style={styles.titleWrapper}>
           <Text style={styles.title}>{article.title}</Text>
-          <Text style={styles.details}>objavil {article.school.name} | {days} {days > 1 ? 'dni' : 'dan'} nazaj</Text>
+          <View style={{flexDirection: 'row', alignItems: 'center'}}>
+            <Image
+              style={{aspectRatio: 1, width: 15, resizeMode: 'contain', marginRight: 5}}
+              source={{uri: host + article.school.logo}}
+            />
+            <Text style={styles.details}>objavil {article.school.name} | {days} {days > 1 ? 'dni' : 'dan'} nazaj</Text>
+          </View>
         </View>
         <View style={styles.descriptionWrapper}>
           <Text style={styles.description}>{article.content}</Text>
@@ -63,7 +71,7 @@ const styles = StyleSheet.create({
     flex: 1
   },
   title: {
-    fontSize: 20,
+    fontSize: 25,
     marginTop: 10,
     marginBottom: 10,
     fontWeight: '500',
@@ -76,7 +84,8 @@ const styles = StyleSheet.create({
     textAlign: 'left'
   },
   titleWrapper: {
-    padding: 15
+    padding: 20,
+    paddingBottom: 0
   },
   description: {
     fontSize: 15,

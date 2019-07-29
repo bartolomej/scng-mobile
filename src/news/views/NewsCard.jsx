@@ -9,23 +9,20 @@ export default ({logo, school, title, date, description, onClick, style, display
   return (
     <View>
       <TouchableOpacity onPress={onClick} style={[styles.container, style]}>
-        <View style={styles.leftContainer}>
+        <View style={{flexDirection: 'row', paddingBottom: 10}}>
           <Image
             style={{aspectRatio: 1, width: 50, resizeMode: 'contain'}}
             source={{uri: logo}}
           />
+          <View style={styles.innerRightContainer}>
+            <View style={styles.innerTopBottomContainer}>
+              <Text style={{fontSize: 14, fontWeight: '500'}}>{title}</Text>
+              <Text style={{fontSize: 10, textAlign: 'left', paddingTop: 5}}>{days} {days > 1 ? 'dni' : 'dan'} nazaj</Text>
+            </View>
+          </View>
         </View>
-        <View style={styles.rightContainer}>
-          <View style={styles.topRightContainer}>
-            <Text style={styles.schoolText}>objavil {school.toUpperCase()}</Text>
-            <Text style={styles.dayText}>{days} {days > 1 ? 'dni' : 'dan'} nazaj</Text>
-          </View>
-          <View style={styles.titleWrapper}>
-            <Text style={styles.title}>{title}</Text>
-          </View>
-          <View style={styles.descriptionWrapper}>
-            <Text style={styles.description}>{description.substring(0, 70)} ...</Text>
-          </View>
+        <View style={{flex: 1, flexDirection: 'column'}}>
+          <Text style={{fontSize: 13, lineHeight: 16, fontStyle: 'italic'}}>{description.substring(0, 100)} ...</Text>
         </View>
       </TouchableOpacity>
       {displayLine && <View style={styles.containerStyle}>
@@ -39,45 +36,22 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     display: 'flex',
-    flexDirection: 'row',
+    flexDirection: 'column',
+    justifyContent: 'space-between',
     marginTop: 15,
-    marginLeft: 10,
-    marginRight: 10,
-    marginBottom: 15
+    marginLeft: 15,
+    marginRight: 15,
+    marginBottom: 15,
   },
-  leftContainer: {
+  innerRightContainer: {
     flex: 1,
-    flexDirection: 'column',
-    justifyContent: 'space-between'
+    marginLeft: 20,
+    justifyContent: 'center'
   },
-  topRightContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between'
-  },
-  rightContainer: {
-    flex: 4,
-    flexDirection: 'column',
-  },
-  title: {
-    fontSize: 16,
-    fontWeight: '500'
-  },
-  schoolText: {
-    fontSize: 11,
-  },
-  dayText: {
-    fontSize: 10
-  },
-  description: {
-    fontSize: 13,
-    fontStyle: 'italic'
-  },
-  titleWrapper: {
+  innerTopBottomContainer: {
+    width: '100%',
     paddingTop: 5,
     paddingBottom: 5
-  },
-  descriptionWrapper: {
-
   },
   containerStyle: {
     width: '100%',

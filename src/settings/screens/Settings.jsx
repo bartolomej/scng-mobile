@@ -4,10 +4,7 @@ import Icon from "react-native-vector-icons/AntDesign";
 import { connect } from 'react-redux'
 import {
   SettingsDividerShort,
-  SettingsDividerLong,
-  SettingsEditText,
   SettingsCategoryHeader,
-  SettingsSwitch,
   SettingsPicker
 } from "react-native-settings-components";
 
@@ -15,6 +12,7 @@ import {fetchSchools, fetchClasses} from "../actions";
 import {changeSelectedClass, changeSelectedSchool} from "../actions";
 import NotificationCard from '../views/NotificationCard';
 import {fetchNotifications} from "../actions";
+import ValuePicker from '../views/ValuePicker';
 
 
 class Settings extends React.Component {
@@ -120,6 +118,9 @@ class Settings extends React.Component {
           value={selectedClass}
           styleModalButtonsText={{ color: colors.monza }}
         />
+        <SettingsDividerShort />
+        <ValuePicker
+          title={'Tema'}/>
         <SettingsCategoryHeader
           title={"Obvestila"}
           textStyle={Platform.OS === "android" ? { color: colors.monza } : null}
