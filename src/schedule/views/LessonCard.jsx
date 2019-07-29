@@ -15,6 +15,13 @@ export default ({periodStart, periodEnd, shortName, fullName, classRoom, teacher
           <Text style={styles.fromHour}>{moment(periodStart).format('HH:mm')}</Text>
           <Text style={styles.toHour}>{moment(periodEnd).format('HH:mm')}</Text>
         </View>
+        <View
+          style={{
+            flex: 0.4,
+            borderLeftWidth: 1,
+            borderLeftColor: 'grey',
+          }}
+        />
         <View style={styles.rightContainer}>
           <Text style={styles.fullName}>{fullName}</Text>
           {teacherName.length > 0 && classRoom.length > 0 &&
@@ -36,14 +43,16 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginTop: 8,
-    marginBottom: 8,
+    marginTop: 12,
+    marginBottom: 12,
     marginLeft: 10,
     marginRight: 10
   },
   leftContainer: {
     flex: 1,
-    flexDirection: 'column'
+    flexDirection: 'column',
+    textAlign: 'center',
+    justifyContent: 'center'
   },
   rightContainer: {
     flex: 3,
@@ -59,11 +68,13 @@ const styles = StyleSheet.create({
     textAlign: 'right'
   },
   fromHour: {
-    fontSize: 15,
+    color: 'black',
+    fontSize: 18,
     fontWeight: '500',
   },
   toHour: {
-    fontSize: 15,
+    color: 'grey',
+    fontSize: 18,
     fontWeight: '500',
   },
   fullName: {

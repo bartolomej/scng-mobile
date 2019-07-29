@@ -26,17 +26,19 @@ export default ({dates, selected, onDayChange}) => {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    marginBottom: 10
   },
   calendarContainer: {
     flexDirection: 'row',
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
+    borderBottomWidth: 1,
+    borderBottomColor: 'black'
   }
 });
 
 const DayIcon = ({date, onClick, selected, index}) => {
-  let weekDays = ['MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT', 'SUN'];
-  let monthDay = moment(date).daysInMonth();
+  let weekDays = ['PON', 'TOR', 'SRE', 'CET', 'PET', 'SOB', 'NED'];
+  let monthDay = moment(date).date();
   let weekDay = moment(date).weekday();
 
   return (
@@ -69,9 +71,12 @@ const dayStyles = StyleSheet.create({
     textAlign: 'center'
   },
   dayText: {
-    fontSize: 5,
+    fontSize: 1,
     textAlign: 'center'
   },
-  dayTextSelected: {},
+  dayTextSelected: {
+    fontSize: 2,
+    textAlign: 'center'
+  },
   dayNumberWrapper: {}
 });

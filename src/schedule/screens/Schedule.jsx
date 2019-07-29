@@ -1,5 +1,5 @@
 import React from 'react'
-import { RefreshControl, ScrollView } from 'react-native';
+import { View, RefreshControl, ScrollView } from 'react-native';
 import { connect } from 'react-redux'
 import moment from 'moment';
 
@@ -51,29 +51,31 @@ class Schedule extends React.Component {
     const schedule = this.props.schedule.schedule;
 
     return (
-      <ScrollView
-        style={{flex: 1}}
-        refreshControl={
-          <RefreshControl
-            refreshing={this.props.schedule.isLoading}
-            onRefresh={this.onRefresh}/>
-        }>
+      <View style={{flex: 1}}>
         <Timetable
           dates={dates}
           selected={this.state.selected}
           onDayChange={selected => this.setState({selected})}/>
-        {schedule !== null && schedule[this.state.selected].lessons.map((ele, index) => {
-          if (ele.groups.length === 0) return null;
-          return <LessonCard
-            key={index}
-            periodStart={ele.groups[0].start}
-            periodEnd={ele.groups[0].end}
-            teacherName={ele.groups[0].teacher}
-            fullName={ele.groups[0].fullName}
-            shortName={ele.groups[0].shortName}
-            classRoom={ele.groups[0].classRoom}/>
-        })}
-      </ScrollView>
+        <ScrollView
+          refreshControl={
+            <RefreshControl
+              refreshing={this.props.schedule.isLoading}
+              onRefresh={this.onRefresh}/>
+          }>
+          {schedule !== null && schedule[this.state.selected].lessons.map((ele, index) => {
+            if (ele.groups.length === 0) return null;
+            return <LessonCard
+              key={index}
+              periodStart={ele.groups[0].start}
+              periodEnd={ele.groups[0].end}
+              teacherName={ele.groups[0].teacher}
+              fullName={ele.groups[0].fullName}
+              shortName={ele.groups[0].shortName}
+              displayLine={index+2 !== schedule[this.state.selected].lessons.length}
+              classRoom={ele.groups[0].classRoom}/>
+          })}
+        </ScrollView>
+      </View>
     )
   }
 }

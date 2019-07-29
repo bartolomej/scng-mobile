@@ -1,5 +1,6 @@
 import React from 'react'
 import { ScrollView, View, Text, TouchableOpacity, Platform, RefreshControl } from 'react-native';
+import Icon from "react-native-vector-icons/AntDesign";
 import { connect } from 'react-redux'
 import {
   SettingsDividerShort,
@@ -34,7 +35,14 @@ class Settings extends React.Component {
         <TouchableOpacity
           style={{margin: 10}}
           onPress={() => {navigation.getParam('goToNotification')()}}>
-          <Text>N</Text>
+          <Icon name="infocirlceo" size={22} color={'black'} />
+        </TouchableOpacity>
+      ),
+      headerLeft: (
+        <TouchableOpacity
+          style={{margin: 10}}
+          onPress={() => {navigation.getParam('goToReport')()}}>
+          <Icon name="message1" size={22} color={'black'} />
         </TouchableOpacity>
       ),
     };
@@ -45,6 +53,9 @@ class Settings extends React.Component {
     this.props.navigation.setParams({
       goToNotification: () => {
         this.props.navigation.navigate('Notification');
+      },
+      goToReport: () => {
+        this.props.navigation.navigate('Report');
       }
     });
   }
@@ -118,7 +129,6 @@ class Settings extends React.Component {
           <NotificationCard
             key={index}
             title={ele.title}
-            shortDescription={ele.shortDescription}
             description={ele.description}
             displayLine={index+1 !== notifications.length}
             date={ele.date}/>
