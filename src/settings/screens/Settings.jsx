@@ -49,7 +49,6 @@ class Settings extends React.Component {
   };
 
   async componentDidMount() {
-    await this.getSchools();
     this.props.navigation.setParams({
       goToNotification: () => {
         this.props.navigation.navigate('Notification');
@@ -58,6 +57,7 @@ class Settings extends React.Component {
         this.props.navigation.navigate('Report');
       }
     });
+    await this.getSchools();
   }
 
   onRefresh = async () => {

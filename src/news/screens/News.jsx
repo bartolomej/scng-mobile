@@ -1,11 +1,15 @@
 import React from 'react'
 import { RefreshControl, ScrollView, Text, StyleSheet, TouchableOpacity } from 'react-native';
-import Icon from "react-native-vector-icons/MaterialCommunityIcons";
+import Icon from "react-native-vector-icons/AntDesign";
+import Icon2 from 'react-native-vector-icons/MaterialCommunityIcons';
 import { connect } from 'react-redux'
 
 import NewsCard from '../views/NewsCard';
+import Message from '../../Message';
 import {fetchNews} from "../actions";
 import {host} from '../../../app.json';
+import parseError from '../../errors';
+
 
 class News extends React.Component {
 
@@ -21,7 +25,7 @@ class News extends React.Component {
         <TouchableOpacity
           style={{margin: 10}}
           onPress={() => {navigation.getParam('goToWeb')()}}>
-          <Icon name="web" size={22} color={'black'} />
+          <Icon2 name="web" size={22} color={'black'} />
         </TouchableOpacity>
       ),
     };
@@ -51,16 +55,22 @@ class News extends React.Component {
             onRefresh={this.onRefresh}
           />
         }>
-        {this.props.news.news.map((news, index) => (
+        {this.props.news.error && this.props.news.articles.length === 0 && (
+          <Message
+            title={parseError(this.props.news.error).title}
+            description={parseError(this.props.news.error).description}
+            image={parseError(this.props.news.error).image}/>
+        )}
+        {this.props.news.articles.map((article, index) => (
           <NewsCard
             key={index}
-            onClick={() => this.goToArticle(news)}
-            title={news.title}
-            logo={host + news.school.logo}
-            school={news.school.name}
-            description={news.content}
-            displayLine={index+1 !== this.props.news.news.length}
-            date={news.date}/>
+            onClick={() => this.goToArticle(article)}
+            title={article.title}
+            logo={host + article.school.logo}
+            school={article.school.name}
+            description={article.content}
+            displayLine={index+1 !== this.props.news.articles.length}
+            date={article.date}/>
         ))}
       </ScrollView>
     )

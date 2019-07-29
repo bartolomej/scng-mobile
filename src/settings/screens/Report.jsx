@@ -5,6 +5,8 @@ import { connect } from 'react-redux';
 import TextInput from '../views/TextInput';
 import Button from '../views/Button';
 import {postFeedback} from "../actions";
+import parseError from '../../errors';
+import Message from '../../Message';
 
 
 class Report extends React.Component {
@@ -42,8 +44,11 @@ class Report extends React.Component {
   render() {
     if (this.state.error) {
       return (
-        <View>
-          <Text>{this.state.error.message}</Text>
+        <View style={{height: '70%'}}>
+          <Message
+            title={parseError(this.state.error).title}
+            description={parseError(this.state.error).description}
+            image={parseError(this.state.error).image}/>
         </View>
       )
     }

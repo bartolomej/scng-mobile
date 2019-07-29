@@ -7,6 +7,7 @@ export const FETCH_NOTIFICATIONS_SUCCESS = 'FETCH_NOTIFICATIONS_SUCCESS';
 
 export const CHANGE_SELECTED_SCHOOL = 'CHANGE_SELECTED_SCHOOL';
 export const CHANGE_SELECTED_CLASS = 'CHANGE_SELECTED_CLASS';
+export const SET_DEVICE_ID = 'SET_DEVICE_ID';
 
 export const REQUEST_START = 'REQUEST_START';
 export const REQUEST_FAILED = 'REQUEST_FAILED';
@@ -48,9 +49,10 @@ export const changeSelectedClass = schoolClass => {
   }
 };
 
-export const requestStart = () => {
+export const setDeviceId = (id) => {
   return {
-    type: REQUEST_START
+    type: SET_DEVICE_ID,
+    id
   }
 };
 
@@ -58,12 +60,6 @@ export const requestFailed = (error) => {
   return {
     type: REQUEST_FAILED,
     error
-  }
-};
-
-export const requestSuccess = () => {
-  return {
-    type: REQUEST_SUCCESS
   }
 };
 

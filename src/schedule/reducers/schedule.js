@@ -3,7 +3,7 @@ import { FETCH_SCHEDULE_REQUEST, FETCH_SCHEDULE_FAILURE, FETCH_SCHEDULE_SUCCESS}
 const initialState = {
   error: null,
   isLoading: false,
-  schedule: null
+  timetable: []
 };
 
 export default (state = initialState, action) => {
@@ -24,7 +24,7 @@ export default (state = initialState, action) => {
         ...state,
         isLoading: false,
         error: null,
-        schedule: action.response
+        timetable: action.response
       };
     default: return state;
   }

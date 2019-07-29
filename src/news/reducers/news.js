@@ -3,7 +3,7 @@ import {FETCH_NEWS_REQUEST, FETCH_NEWS_SUCCESS, FETCH_NEWS_FAILURE} from "../act
 const initialState = {
   error: null,
   isLoading: false,
-  news: []
+  articles: []
 };
 
 export default (state = initialState, action) => {
@@ -25,7 +25,7 @@ export default (state = initialState, action) => {
         ...state,
         isLoading: false,
         error: null,
-        news: action.response
+        articles: action.response
       };
     default: return state;
   }
