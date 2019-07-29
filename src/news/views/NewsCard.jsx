@@ -2,6 +2,8 @@ import React from 'react';
 import moment from 'moment';
 import { Image, View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 
+import Line from '../../views/HorizontalLine';
+
 
 export default ({logo, school, title, date, description, onClick, style, displayLine = true}) => {
   let duration = moment.duration(moment().diff(moment(date)));
@@ -25,9 +27,7 @@ export default ({logo, school, title, date, description, onClick, style, display
           <Text style={{fontSize: 13, lineHeight: 16, fontStyle: 'italic'}}>{description.substring(0, 100)} ...</Text>
         </View>
       </TouchableOpacity>
-      {displayLine && <View style={styles.containerStyle}>
-        <View style={styles.dividerStyle} />
-      </View>}
+      {displayLine && <Line/>}
     </View>
   )
 }
@@ -52,15 +52,5 @@ const styles = StyleSheet.create({
     width: '100%',
     paddingTop: 5,
     paddingBottom: 5
-  },
-  containerStyle: {
-    width: '100%',
-    height: 1,
-    backgroundColor: 'rgb(255,255,255)',
-  },
-  dividerStyle: {
-    width: '100%',
-    height: '100%',
-    backgroundColor: 'rgb(220,220,223)',
-  },
+  }
 });

@@ -2,15 +2,15 @@ import React from 'react';
 import moment from 'moment';
 import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
 
+import Line from '../../views/HorizontalLine';
+
 
 export default ({title, description, date, displayTopLine = true, displayBottomLine = true}) => {
   let duration = moment.duration(moment().diff(moment(date)));
   let days = Math.round(duration.asDays());
   return (
     <View>
-      {displayTopLine && <View style={styles.containerStyle}>
-        <View style={styles.dividerStyle} />
-      </View>}
+      {displayTopLine && <Line/>}
       <TouchableOpacity style={styles.container}>
         <View style={{flex: 1}}>
           <Text style={{fontWeight: '500'}}>{title}</Text>
@@ -19,9 +19,7 @@ export default ({title, description, date, displayTopLine = true, displayBottomL
           <Text style={styles.date}>{days} {days > 1 ? 'dni' : 'dan'} nazaj</Text>
         </View>
       </TouchableOpacity>
-      {displayBottomLine && <View style={styles.containerStyle}>
-        <View style={styles.dividerStyle} />
-      </View>}
+      {displayBottomLine && <Line/>}
     </View>
   )
 }
@@ -35,15 +33,5 @@ const styles = StyleSheet.create({
   date: {
     color: 'grey',
     textAlign: 'right'
-  },
-  containerStyle: {
-    width: '100%',
-    height: 1,
-    backgroundColor: 'rgb(255,255,255)',
-  },
-  dividerStyle: {
-    width: '100%',
-    height: '100%',
-    backgroundColor: 'rgb(220,220,223)',
-  },
+  }
 });

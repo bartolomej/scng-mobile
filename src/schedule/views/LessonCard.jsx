@@ -6,6 +6,8 @@ import {
 } from 'react-native';
 import moment from 'moment';
 
+import Line from '../../views/HorizontalLine';
+
 
 export default ({periodStart, periodEnd, shortName, fullName, classRoom, teacherName, group, displayLine = true}) => {
   let isCurrent = moment().isBetween(moment(periodStart), moment(periodEnd));
@@ -31,9 +33,7 @@ export default ({periodStart, periodEnd, shortName, fullName, classRoom, teacher
           </View>}
         </View>
       </View>
-      {displayLine && <View style={styles.containerStyle}>
-        <View style={styles.dividerStyle} />
-      </View>}
+      {displayLine && <Line/>}
     </View>
   )
 }
@@ -83,16 +83,5 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontWeight: '500',
     textAlign: 'left'
-  },
-
-  containerStyle: {
-    width: '100%',
-    height: 1,
-    backgroundColor: 'rgb(255,255,255)',
-  },
-  dividerStyle: {
-    width: '100%',
-    height: '100%',
-    backgroundColor: 'rgb(220,220,223)',
-  },
+  }
 });

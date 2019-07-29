@@ -1,6 +1,8 @@
 import React, {useState} from 'react';
 import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
 
+import Line from '../../views/HorizontalLine';
+
 
 export default ({title, displayBottomLine = true, displayTopLine = true, items}) => {
 
@@ -8,9 +10,7 @@ export default ({title, displayBottomLine = true, displayTopLine = true, items})
 
   return (
     <View>
-      {displayTopLine && <View style={styles.containerStyle}>
-        <View style={styles.dividerStyle} />
-      </View>}
+      {displayTopLine && <Line/>}
       <TouchableOpacity style={styles.container}>
         {/*<PickerModal
           closeModal={this.closeModal}
@@ -32,9 +32,7 @@ export default ({title, displayBottomLine = true, displayTopLine = true, items})
           <Text style={styles.value}>{value}</Text>
         </View>
       </TouchableOpacity>
-      {displayBottomLine && <View style={styles.containerStyle}>
-        <View style={styles.dividerStyle} />
-      </View>}
+      {displayBottomLine && <Line/>}
     </View>
   )
 }
@@ -57,15 +55,5 @@ const styles = StyleSheet.create({
   },
   value: {
 
-  },
-  containerStyle: {
-    width: '100%',
-    height: 1,
-    backgroundColor: 'rgb(255,255,255)',
-  },
-  dividerStyle: {
-    width: '100%',
-    height: '100%',
-    backgroundColor: 'rgb(220,220,223)',
-  },
+  }
 });
