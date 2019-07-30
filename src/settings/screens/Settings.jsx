@@ -122,6 +122,8 @@ class Settings extends React.Component {
           value={selectedClass.label}
           title={'Razred'}/>
         <ValueSwitch
+          switchColor={'black'}
+          bcgColor={'orange'}
           displayTopLine={true}
           displayBottomLine={false}
           title={'Dark mode'}

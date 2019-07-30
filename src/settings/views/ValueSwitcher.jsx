@@ -4,7 +4,7 @@ import {View, Text, TouchableOpacity, StyleSheet, Switch} from 'react-native';
 import Line from '../../views/HorizontalLine';
 
 
-export default ({title, displayBottomLine = true, displayTopLine = true, value, onValueChange}) => {
+export default ({title, displayBottomLine = true, displayTopLine = true, value, onValueChange, bcgColor = 'black', switchColor = 'white'}) => {
   return (
     <View>
       {displayTopLine && <Line/>}
@@ -13,7 +13,7 @@ export default ({title, displayBottomLine = true, displayTopLine = true, value, 
           <Text style={styles.title}>{title}</Text>
         </View>
         <View style={styles.valueContainer}>
-          <Switch value={value} onValueChange={onValueChange}/>
+          <Switch thumbColor={switchColor} onTintColor={bcgColor} value={value} onValueChange={onValueChange}/>
         </View>
       </TouchableOpacity>
       {displayBottomLine && <Line/>}
