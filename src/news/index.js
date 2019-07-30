@@ -10,11 +10,7 @@ export const navigation = createAppContainer(
   createStackNavigator({
     News: NewsScreen,
     Web: WebScreen,
-    Article: {
-      screen: ArticleScreen,
-      mode: 'modal',
-      headerMode: 'none'
-    },
+    Article: ArticleScreen
   })
 );
 

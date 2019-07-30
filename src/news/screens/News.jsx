@@ -1,11 +1,10 @@
 import React from 'react'
 import { RefreshControl, ScrollView, Text, StyleSheet, TouchableOpacity } from 'react-native';
-import Icon from "react-native-vector-icons/AntDesign";
 import Icon2 from 'react-native-vector-icons/MaterialCommunityIcons';
 import { connect } from 'react-redux'
 
 import NewsCard from '../views/NewsCard';
-import Message from '../../Message';
+import Message from '../../views/Message';
 import {fetchNews} from "../actions";
 import {host} from '../../../app.json';
 import parseError from '../../errors';
@@ -22,6 +21,7 @@ class News extends React.Component {
 
   static navigationOptions = ({ navigation }) => {
     return {
+      header: null,
       headerStyle: {
         borderBottomWidth: navigation.getParam('showBorder') ? 1 : 0 // TODO: dynamically show border on scroll
       },
@@ -96,6 +96,7 @@ export default connect(state => ({news: state.news}))(News);
 const styles = StyleSheet.create({
   container: {
     height: '100%',
-    width: '100%'
+    width: '100%',
+    marginTop: '10%'
   }
 });

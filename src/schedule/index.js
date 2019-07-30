@@ -7,6 +7,8 @@ import {fetchSchedule} from './actions';
 export const navigation = createAppContainer(
   createStackNavigator({
     Schedule: ScheduleScreen,
+  }, {
+    headerMode: "none",
   })
 );
 

@@ -7,7 +7,7 @@ import moment from 'moment';
 import LessonCard from '../views/LessonCard';
 import {fetchSchedule} from "../actions";
 import Timetable from '../views/Timetable';
-import Message from '../../Message';
+import Message from '../../views/Message';
 import parseError from '../../errors';
 
 
@@ -51,11 +51,11 @@ class Schedule extends React.Component {
     return {dates, selected};
   };
 
+  // TODO: content fade effect
   render() {
     const schedule = this.props.schedule;
-    console.log(this.state);
     return (
-      <View style={{flex: 1}}>
+      <View style={{flex: 1, paddingTop: '10%'}}>
         {schedule.timetable.length > 0 && (
           <Timetable
             dates={this.parseTimetableData(this.props.schedule.timetable).dates}

@@ -12,10 +12,10 @@ export default ({text, onClick}) => {
 
 const styles = StyleSheet.create({
   container: {
-    width: 160,
-    height: 40,
+    width: 140,
+    height: 45,
     margin: 20,
-    backgroundColor: 'grey',
+    backgroundColor: 'orange',
     borderRadius: 20,
     justifyContent: 'center'
   },

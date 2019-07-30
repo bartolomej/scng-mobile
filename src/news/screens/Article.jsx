@@ -15,8 +15,11 @@ class Article extends React.Component {
 
   static navigationOptions = ({ navigation }) => {
     return {
-      style: { shadowColor: 'transparent' },
-      headerTitle: 'Clanek',
+      headerBackTitle: null,
+      headerTintColor: 'black',
+      headerStyle: {
+        borderBottomWidth: 0
+      },
       headerRight: (
         <TouchableOpacity
           style={{margin: 10}}
@@ -85,6 +88,7 @@ const styles = StyleSheet.create({
   },
   titleWrapper: {
     padding: 20,
+    paddingTop: 10,
     paddingBottom: 0
   },
   description: {

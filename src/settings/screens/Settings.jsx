@@ -1,12 +1,15 @@
 import React from 'react'
 import { ScrollView, View, Text, TouchableOpacity, Platform, RefreshControl } from 'react-native';
-import Icon from "react-native-vector-icons/AntDesign";
+import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import { connect } from 'react-redux'
 import {
   SettingsDividerShort,
   SettingsCategoryHeader,
   SettingsPicker
 } from "react-native-settings-components";
+
+import Line from '../../views/HorizontalLine';
+
 
 import {fetchSchools, fetchClasses} from "../actions";
 import {changeSelectedClass, changeSelectedSchool} from "../actions";
@@ -30,19 +33,18 @@ class Settings extends React.Component {
       headerStyle: {
         borderBottomWidth: 0
       },
-      headerTitle: 'Vec',
       headerRight: (
         <TouchableOpacity
           style={{margin: 10}}
           onPress={() => {navigation.getParam('goToNotification')()}}>
-          <Icon name="infocirlceo" size={22} color={'black'} />
+          <Icon name="information" size={22} color={'black'} />
         </TouchableOpacity>
       ),
       headerLeft: (
         <TouchableOpacity
           style={{margin: 10}}
           onPress={() => {navigation.getParam('goToReport')()}}>
-          <Icon name="message1" size={22} color={'black'} />
+          <Icon name="chat-processing" size={22} color={'black'} />
         </TouchableOpacity>
       ),
     };
@@ -95,8 +97,9 @@ class Settings extends React.Component {
         }>
         <SettingsCategoryHeader
           title={"Nastavitve"}
-          textStyle={Platform.OS === "android" ? { color: colors.monza } : null}
+          titleStyle={{ color: 'lightgrey' }}
         />
+        <Line/>
         {/*<SettingsDividerShort /> // TODO: implement modal selector
         <SettingsPicker
           title="Sola"
@@ -122,7 +125,7 @@ class Settings extends React.Component {
         />
         <SettingsDividerShort />*/}
         <ValuePicker
-          displayTopLine={true}
+          displayTopLine={false}
           displayBottomLine={false}
           title={'Sola'}/>
         <ValuePicker
@@ -135,12 +138,14 @@ class Settings extends React.Component {
           title={'Tema'}/>
         <SettingsCategoryHeader
           title={"Obvestila"}
-          textStyle={Platform.OS === "android" ? { color: colors.monza } : null}
+          titleStyle={{ color: 'lightgrey' }}
         />
+        <Line/>
         {notifications.map((ele, index) => (
           <NotificationCard
             key={index}
-            displayBottomLine={false}
+            displayTopLine={false}
+            displayBottomLine={index+1 !== notifications.length}
             title={ele.title}
             description={ele.description}
             displayLine={index+1 !== notifications.length}
@@ -155,12 +160,3 @@ export default connect(state => ({
   settings: state.settings.settings,
   notification: state.settings.notification
 }))(Settings);
-
-
-const colors = {
-  white: "#FFFFFF",
-  monza: "#C70039",
-  switchEnabled: "#C70039",
-  switchDisabled: "#efeff3",
-  blueGem: "#27139A",
-};

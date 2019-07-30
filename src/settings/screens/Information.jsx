@@ -13,10 +13,11 @@ class Information extends React.Component {
 
   static navigationOptions = ({ navigation }) => {
     return {
+      headerBackTitle: null,
+      headerTintColor: 'black',
       headerStyle: {
         borderBottomWidth: 0
       },
-      headerTitle: 'Informacije',
     };
   };
 
