@@ -7,8 +7,14 @@ const initialState = {
   error: null,
   isLoading: false,
   isFirstTime: true,
-  selectedClass: null,
-  selectedSchool: null,
+  selectedClass: {
+    label: '...',
+    value: '...'
+  },
+  selectedSchool: {
+    label: '...',
+    value: '...'
+  },
   deviceId: null,
   theme: 'dark'
 };

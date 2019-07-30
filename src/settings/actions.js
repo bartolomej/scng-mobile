@@ -36,17 +36,23 @@ export const requestNotificationsSuccess = response => {
 };
 
 
-export const changeSelectedSchool = school => {
+export const changeSelectedSchool = (value, label) => {
   return {
     type: CHANGE_SELECTED_SCHOOL,
-    school
+    school: {
+      value,
+      label
+    }
   }
 };
 
-export const changeSelectedClass = schoolClass => {
+export const changeSelectedClass = (value, label) => {
   return {
     type: CHANGE_SELECTED_CLASS,
-    class: schoolClass
+    class: {
+      value,
+      label
+    }
   }
 };
 

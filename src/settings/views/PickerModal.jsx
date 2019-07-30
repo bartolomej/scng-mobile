@@ -83,9 +83,9 @@ class PickerModal extends Component {
     scrollViewContentHeight: null,
   };
 
-  onSelectPickerItem = value => () => {
+  onSelectPickerItem = (value, label) => () => {
     const { onSelectItem } = this.props;
-    onSelectItem(value);
+    onSelectItem(value, label);
   };
 
   calculateScrollViewContentHeight = (e) => {
@@ -96,19 +96,21 @@ class PickerModal extends Component {
   };
 
   renderPickerItem = ({ item, index }) => {
-    const { pickerValue, options, renderListItem } = this.props;
+    const { pickerValue, options, renderListItem, itemTextColor, itemSelectedColor } = this.props;
     return isFunction(renderListItem) ? renderListItem({
       item,
       index,
-      onSelect: this.onSelectPickerItem(item.value),
-      selected: pickerValue.indexOf(item.value) !== -1,
+      onSelect: this.onSelectPickerItem(item.value, item.label),
+      selected: pickerValue.some(e => e.value === item.value),
       isFirst: index === 0,
       isLast: index === options.length - 1,
     }) : (
       <PickerModalItem
+        selectedColor={itemSelectedColor}
+        textColor={itemTextColor}
         key={`picker-item:${toString(index)}`}
-        onSelect={this.onSelectPickerItem(item.value)}
-        selected={pickerValue.indexOf(item.value) !== -1}
+        onSelect={this.onSelectPickerItem(item.value, item.label)}
+        selected={pickerValue.some(e => e.value === item.value)}
         label={item.label}
         value={item.value}
         isLast={index === options.length - 1}
