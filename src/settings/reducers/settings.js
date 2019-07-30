@@ -1,3 +1,5 @@
+import {SET_DEVICE_ID, SET_THEME} from "../actions";
+
 const {CHANGE_SELECTED_CLASS, CHANGE_SELECTED_SCHOOL, REQUEST_START, REQUEST_FAILED, REQUEST_SUCCESS} = require('../actions');
 
 
@@ -6,7 +8,9 @@ const initialState = {
   isLoading: false,
   isFirstTime: true,
   selectedClass: null,
-  selectedSchool: null
+  selectedSchool: null,
+  deviceId: null,
+  theme: 'dark'
 };
 
 export default (state = initialState, action) => {
@@ -36,6 +40,16 @@ export default (state = initialState, action) => {
       return {
         ...state,
         isLoading: false
+      };
+    case SET_DEVICE_ID:
+      return {
+        ...state,
+        deviceId: action.deviceId
+      };
+    case SET_THEME:
+      return {
+        ...state,
+        theme: action.theme
       };
     default: return state;
   }

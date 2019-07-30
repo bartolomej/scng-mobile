@@ -8,6 +8,7 @@ export const FETCH_NOTIFICATIONS_SUCCESS = 'FETCH_NOTIFICATIONS_SUCCESS';
 export const CHANGE_SELECTED_SCHOOL = 'CHANGE_SELECTED_SCHOOL';
 export const CHANGE_SELECTED_CLASS = 'CHANGE_SELECTED_CLASS';
 export const SET_DEVICE_ID = 'SET_DEVICE_ID';
+export const SET_THEME = 'SET_THEME';
 
 export const REQUEST_START = 'REQUEST_START';
 export const REQUEST_FAILED = 'REQUEST_FAILED';
@@ -53,6 +54,13 @@ export const setDeviceId = (id) => {
   return {
     type: SET_DEVICE_ID,
     id
+  }
+};
+
+export const setTheme = (theme) => {
+  return {
+    type: SET_THEME,
+    theme
   }
 };
 

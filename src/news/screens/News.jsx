@@ -8,6 +8,7 @@ import Message from '../../views/Message';
 import {fetchNews} from "../actions";
 import {host} from '../../../app.json';
 import parseError from '../../errors';
+import {darkTheme, lightTheme} from '../../styles';
 
 
 class News extends React.Component {
@@ -52,9 +53,11 @@ class News extends React.Component {
   };
 
   render() {
+    const isDark = () => this.props.theme === 'dark';
+
     return (
       <ScrollView
-        style={styles.container}
+        style={[styles.container, isDark() ? styles.darkContainer : styles.lightContainer]}
         onScroll={() => this.setState({showBorder: true})}
         refreshControl={
           <RefreshControl
@@ -71,6 +74,7 @@ class News extends React.Component {
         {this.props.news.articles.map((article, index) => (
           <NewsCard
             key={index}
+            theme={this.props.theme}
             onClick={() => this.goToArticle(article)}
             title={article.title}
             logo={host + article.school.logo}
@@ -85,18 +89,25 @@ class News extends React.Component {
 
   goToArticle = news => {
     this.props.navigation.navigate('Article', {
-      article: news
+      article: news,
+      theme: this.props.theme
     });
   }
 }
 
-export default connect(state => ({news: state.news}))(News);
+export default connect(state => ({news: state.news, theme: state.settings.settings.theme}))(News);
 
 
 const styles = StyleSheet.create({
   container: {
     height: '100%',
     width: '100%',
-    marginTop: '10%'
+    paddingTop: '10%'
+  },
+  darkContainer: {
+    backgroundColor: darkTheme.BACKGROUND_COLOR_DARK
+  },
+  lightContainer: {
+    backgroundColor: lightTheme.BACKGROUND_COLOR_LIGHT
   }
 });

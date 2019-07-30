@@ -2,9 +2,9 @@ import React from 'react';
 import {View, StyleSheet} from 'react-native';
 
 
-export default ({color = 'lightgrey'}) => {
+export default ({color = 'lightgrey', backgroundColor = 'white'}) => {
   return (
-    <View style={styles.containerStyle}>
+    <View style={[styles.containerStyle, {backgroundColor}]}>
       <View style={[styles.dividerStyle, {backgroundColor: color}]} />
     </View>
   )
@@ -15,7 +15,6 @@ const styles = StyleSheet.create({
     width: '100%',
     height: 1,
     alignItems: 'center',
-    backgroundColor: 'white',
   },
   dividerStyle: {
     width: '95%',

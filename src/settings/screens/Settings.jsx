@@ -11,11 +11,12 @@ import {
 import Line from '../../views/HorizontalLine';
 
 
-import {fetchSchools, fetchClasses} from "../actions";
+import {fetchSchools, fetchClasses, setTheme} from "../actions";
 import {changeSelectedClass, changeSelectedSchool} from "../actions";
 import NotificationCard from '../views/NotificationCard';
 import {fetchNotifications} from "../actions";
 import ValuePicker from '../views/ValuePicker';
+import ValueSwitch from '../views/ValueSwitcher';
 
 
 class Settings extends React.Component {
@@ -132,10 +133,12 @@ class Settings extends React.Component {
           displayTopLine={true}
           displayBottomLine={false}
           title={'Razred'}/>
-        <ValuePicker
+        <ValueSwitch
           displayTopLine={true}
           displayBottomLine={false}
-          title={'Tema'}/>
+          title={'Dark mode'}
+          onValueChange={value => value ? this.props.dispatch(setTheme('dark')) : this.props.dispatch(setTheme('light'))}
+          value={this.props.settings.theme === 'dark'}/>
         <SettingsCategoryHeader
           title={"Obvestila"}
           titleStyle={{ color: 'lightgrey' }}
