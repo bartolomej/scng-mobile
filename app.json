@@ -1,5 +1,5 @@
 {
-  "host": "http://localhost:3000",
+  "host": "https://scng-api.thebartdev.com/api",
   "name": "scng",
   "displayName": "scng"
 }
