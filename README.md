@@ -1,20 +1,5 @@
-# SCNG Mobile App
+# [SCNG](http://www.scng.si) Mobile App
 
-### Action logging *rethink
-https://github.com/react-navigation/react-navigation/issues/962
-```
-{
-  "platform": <IOS/Android>,
-  "version": <OS-version>,
-  "phone_id": <unique-phone-id>,
-  "timestamp": <unix>,
-  "action": {
-    "type": <navigation/event>,
-    // TODO
-  }
-}
-```
- 
 ### Available Scripts
 
 In the project directory, you can run:

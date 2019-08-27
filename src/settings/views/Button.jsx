@@ -20,6 +20,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center'
   },
   text: {
-    textAlign: 'center'
+    textAlign: 'center',
+    fontWeight: '500'
   }
 });

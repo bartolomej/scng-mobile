@@ -10,9 +10,9 @@ import Line from '../../views/HorizontalLine';
 
 
 export default ({periodStart, periodEnd, shortName, fullName, classRoom, teacherName, group, displayLine = true}) => {
-  let isCurrent = moment().isBetween(moment(periodStart), moment(periodEnd));
+  let isCurrent = moment().isSameOrAfter(moment(periodStart)) && moment().isSameOrBefore(moment(periodEnd));
   return (
-    <View>
+    <View style={isCurrent ? {backgroundColor: 'orange'} : {}}>
       <View style={styles.container}>
         <View style={styles.leftContainer}>
           <Text style={styles.fromHour}>{moment(periodStart).format('HH:mm')}</Text>
@@ -66,7 +66,8 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between'
   },
   textDetails: {
-    textAlign: 'right'
+    textAlign: 'right',
+    color: 'grey'
   },
   fromHour: {
     color: 'black',

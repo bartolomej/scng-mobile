@@ -1,6 +1,7 @@
 import React from 'react'
 import { RefreshControl, ScrollView, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import Icon2 from 'react-native-vector-icons/MaterialCommunityIcons';
+import Icon1 from 'react-native-vector-icons/Feather';
 import { connect } from 'react-redux'
 
 import NewsCard from '../views/NewsCard';
@@ -21,10 +22,12 @@ class News extends React.Component {
   }
 
   static navigationOptions = ({ navigation }) => {
+    console.log(navigation);
+    const isDark = () => navigation.getParam('theme') === 'dark';
     return {
-      header: null,
       headerStyle: {
-        borderBottomWidth: navigation.getParam('showBorder') ? 1 : 0 // TODO: dynamically show border on scroll
+        //borderBottomWidth: 0,
+        backgroundColor: isDark() ? darkTheme.BACKGROUND_COLOR_DARK : lightTheme.BACKGROUND_COLOR_LIGHT
       },
       headerTitle: 'Novice',
       headerRight: (
@@ -38,13 +41,18 @@ class News extends React.Component {
   };
 
   componentDidMount() {
+    this.setNavigationState()
+  }
+
+  setNavigationState() {
     this.props.navigation.setParams({
       goToWeb: () => {
         this.props.navigation.navigate('Web', {
-          href: 'https://www.scng.si'
+          href: 'https://www.scng.si',
+          theme: this.props.theme
         });
       },
-      showBorder: this.state.showBorder
+      theme: this.props.theme
     });
   }
 
@@ -55,21 +63,37 @@ class News extends React.Component {
   render() {
     const isDark = () => this.props.theme === 'dark';
 
+    if (this.props.news.error) {
+      return (
+        <ScrollView
+          style={[styles.container, isDark() ? styles.darkContainer : styles.lightContainer]}
+          refreshControl={
+            <RefreshControl
+              refreshing={this.props.news.isLoading}
+              onRefresh={this.onRefresh}/>
+          }>
+          <Message
+            title={parseError(this.props.news.error).title}
+            description={parseError(this.props.news.error).description}
+            image={parseError(this.props.news.error).image}/>
+        </ScrollView>
+      )
+    }
+
     return (
       <ScrollView
         style={[styles.container, isDark() ? styles.darkContainer : styles.lightContainer]}
-        onScroll={() => this.setState({showBorder: true})}
         refreshControl={
           <RefreshControl
             refreshing={this.props.news.isLoading}
             onRefresh={this.onRefresh}
           />
         }>
-        {this.props.news.error && this.props.news.articles.length === 0 && (
+        {this.props.news.articles.length === 0 && !this.props.news.isLoading && (
           <Message
-            title={parseError(this.props.news.error).title}
-            description={parseError(this.props.news.error).description}
-            image={parseError(this.props.news.error).image}/>
+            title={'Ni najdenih novic !'}
+            description={'Ponovno zazenite aplikacijo ali obvestite razvijalce.'}
+            image={<Icon1 name="alert-triangle" size={120} color={'black'} />}/>
         )}
         {this.props.news.articles.map((article, index) => (
           <NewsCard
@@ -95,14 +119,16 @@ class News extends React.Component {
   }
 }
 
-export default connect(state => ({news: state.news, theme: state.settings.settings.theme}))(News);
+export default connect(state => ({
+  news: state.news,
+  theme: state.settings.theme
+}))(News);
 
 
 const styles = StyleSheet.create({
   container: {
     height: '100%',
     width: '100%',
-    paddingTop: '10%'
   },
   darkContainer: {
     backgroundColor: darkTheme.BACKGROUND_COLOR_DARK

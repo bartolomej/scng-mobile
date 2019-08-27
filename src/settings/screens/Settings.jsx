@@ -6,10 +6,9 @@ import { connect } from 'react-redux'
 
 import Line from '../../views/HorizontalLine';
 import CategoryHeader from '../views/CategoryHeader';
-import {fetchSchools, fetchClasses, setTheme} from "../actions";
+import {fetchSchools, fetchClasses, setTheme, changeSelectedGroup} from "../actions";
 import {changeSelectedClass, changeSelectedSchool} from "../actions";
-import NotificationCard from '../views/NotificationCard';
-import {fetchNotifications} from "../actions";
+import NotificationCard from '../views/FeatureView';
 import ValuePicker from '../views/ValuePicker';
 import ValueSwitch from '../views/ValueSwitcher';
 
@@ -20,15 +19,20 @@ class Settings extends React.Component {
     super(props);
     this.state = {
       schools: [],
-      classes: []
+      classes: [],
+      groups: [
+        {label: '1. skupina', value: 1},
+        {label: '2. skupina', value: 2}
+      ]
     }
   }
 
   static navigationOptions = ({ navigation }) => {
     return {
       headerStyle: {
-        borderBottomWidth: 0
+        //borderBottomWidth: 0
       },
+      headerTitle: 'Vec',
       headerRight: (
         <TouchableOpacity
           style={{margin: 10}}
@@ -60,7 +64,6 @@ class Settings extends React.Component {
 
   onRefresh = async () => {
     await this.getSchools();
-    fetchNotifications(this.props.dispatch);
   };
 
   getSchools = async () => {
@@ -80,20 +83,20 @@ class Settings extends React.Component {
   };
 
   render() {
-    const {selectedSchool, selectedClass} = this.props.settings;
-    const {notifications} = this.props.notification;
+    const {selectedSchool, selectedClass, selectedGroup} = this.props.settings;
+
     return (
       <ScrollView
         style={{flex: 1}}
         refreshControl={
           <RefreshControl
-            refreshing={this.props.settings.isLoading || this.props.notification.isLoading}
+            refreshing={this.props.settings.isLoading}
             onRefresh={this.onRefresh}
           />
         }>
         <CategoryHeader
           title={"Nastavitve"}
-          titleStyle={{ color: 'lightgrey' }}
+          titleStyle={{color: 'grey'}}
         />
         <Line/>
         <ValuePicker
@@ -115,12 +118,30 @@ class Settings extends React.Component {
           displayTopLine={true}
           displayBottomLine={false}
           items={this.state.classes}
+          titleColor='white'
+          backgroundColor='orange'
+          selectionColor = 'orange'
+          listTextColor = 'black'
           closeButton={() => <Icon1 name="cross" size={22} color={'white'} />}
           onValueChange={async (value, label) => {
             this.props.dispatch(changeSelectedClass(value, label))
           }}
           value={selectedClass.label}
           title={'Razred'}/>
+        <ValuePicker
+          displayTopLine={true}
+          displayBottomLine={false}
+          items={this.state.groups}
+          titleColor='white'
+          backgroundColor='orange'
+          selectionColor = 'orange'
+          listTextColor = 'black'
+          closeButton={() => <Icon1 name="cross" size={22} color={'white'} />}
+          onValueChange={async (value, label) => {
+            this.props.dispatch(changeSelectedGroup(value, label))
+          }}
+          value={selectedGroup.label}
+          title={'Skupina'}/>
         <ValueSwitch
           switchColor={'black'}
           bcgColor={'orange'}
@@ -130,18 +151,18 @@ class Settings extends React.Component {
           onValueChange={value => value ? this.props.dispatch(setTheme('dark')) : this.props.dispatch(setTheme('light'))}
           value={this.props.settings.theme === 'dark'}/>
         <CategoryHeader
-          title={"Obvestila"}
-          titleStyle={{ color: 'lightgrey' }}
+          title={"Glasovanje"}
+          titleStyle={{color: 'grey'}}
         />
         <Line/>
-        {notifications.map((ele, index) => (
+        {this.props.features.map((ele, index) => (
           <NotificationCard
             key={index}
             displayTopLine={false}
-            displayBottomLine={index+1 !== notifications.length}
+            displayBottomLine={index+1 !== this.props.features.length}
             title={ele.title}
-            description={ele.description}
-            displayLine={index+1 !== notifications.length}
+            votes={ele.votes}
+            displayLine={index+1 !== this.props.features.length}
             date={ele.date}/>
         ))}
       </ScrollView>
@@ -150,6 +171,6 @@ class Settings extends React.Component {
 }
 
 export default connect(state => ({
-  settings: state.settings.settings,
-  notification: state.settings.notification
+  settings: state.settings,
+  features: state.settings.features
 }))(Settings);

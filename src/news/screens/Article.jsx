@@ -15,7 +15,6 @@ class Article extends React.Component {
 
   static navigationOptions = ({ navigation }) => {
     const isDark = () => navigation.getParam('theme') === 'dark';
-    console.log(isDark());
     return {
       headerBackTitle: null,
       headerTintColor: isDark() ? darkTheme.PRIMARY_COLOR : lightTheme.PRIMARY_COLOR,
@@ -73,7 +72,9 @@ class Article extends React.Component {
   }
 }
 
-export default connect(state => ({theme: state.settings.settings.theme}))(Article);
+export default connect(state => ({
+  theme: state.settings.theme
+ }))(Article);
 
 
 const styles = StyleSheet.create({

@@ -1,5 +1,5 @@
 export const darkTheme = {
-  BACKGROUND_COLOR_DARK: '#1d2129',
+  BACKGROUND_COLOR_DARK: 'black',
   PRIMARY_COLOR: 'white',
   SECONDARY_SATURATED_COLOR: 'orange',
   SECONDARY_LIGHT_COLOR: 'grey'

@@ -90,46 +90,9 @@ const styles = StyleSheet.create({
     alignItems: 'flex-end'
   },
   title: {
-    fontSize: 14
+    fontSize: 14,
   },
   value: {
 
   }
-});
-
-const pickerStyle = StyleSheet.create({
-  defaultContainerStyle: {
-    padding: 0,
-    minHeight: 50,
-    backgroundColor: 'white',
-    alignItems: 'center',
-    flexDirection: 'row',
-  },
-  defaultTitleStyle: {
-    flex: 1,
-    paddingLeft: 16,
-    paddingRight: 8,
-    fontSize: 16,
-  },
-  defaultValueStyle: {
-    color: 'rgb(160,160,160)',
-    fontSize: 14,
-    flex: 0,
-    paddingLeft: 8,
-    paddingRight: 16,
-  },
-  defaultDisabledOverlayStyle: {
-    backgroundColor: 'rgba(255,255,255,0.6)',
-    position: 'absolute',
-    top: 0,
-    right: 0,
-    bottom: 0,
-    left: 0,
-  },
-  headerCloseBtnText: {
-    paddingHorizontal: 8,
-    paddingVertical: 4,
-    color: 'white',
-    fontSize: 16,
-  },
 });
