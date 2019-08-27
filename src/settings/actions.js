@@ -1,80 +1,72 @@
 import fetch from 'cross-fetch';
 import {host} from '../../app.json';
 
-export const FETCH_NOTIFICATIONS_REQUEST = 'FETCH_NOTIFICATIONS_REQUEST';
-export const FETCH_NOTIFICATIONS_FAILURE = 'FETCH_NOTIFICATIONS_FAILURE';
-export const FETCH_NOTIFICATIONS_SUCCESS = 'FETCH_NOTIFICATIONS_SUCCESS';
-
 export const CHANGE_SELECTED_SCHOOL = 'CHANGE_SELECTED_SCHOOL';
+export const CHANGE_SELECTED_GROUP = 'CHANGE_SELECTED_GROUP';
 export const CHANGE_SELECTED_CLASS = 'CHANGE_SELECTED_CLASS';
 export const SET_DEVICE_ID = 'SET_DEVICE_ID';
+export const SET_THEME = 'SET_THEME';
 
 export const REQUEST_START = 'REQUEST_START';
 export const REQUEST_FAILED = 'REQUEST_FAILED';
 export const REQUEST_SUCCESS = 'REQUEST_SUCCESS';
 
+export const ADD_FEATURE = 'ADD_FEATURE';
+export const FETCH_FEATURES_REQUEST = 'FETCH_FEATURES_REQUEST';
+export const FETCH_FEATURE_FAILURE = 'FETCH_FEATURE_FAILURE';
+export const FETCH_FEATURE_SUCCESS = 'FETCH_FEATURE_SUCCESS';
+export const VOTE_FEATURE = 'VOTE_FEATURE';
 
-export const requestNotifications = () => {
-  return {
-    type: FETCH_NOTIFICATIONS_REQUEST,
-  }
+
+export const changeSelectedGroup = (value, label) => {
+  return { type: CHANGE_SELECTED_GROUP, group: {value, label} }
 };
 
-export const requestNotificationsFailed = error => {
-  return {
-    type: FETCH_NOTIFICATIONS_FAILURE,
-    error
-  }
+export const changeSelectedSchool = (value, label) => {
+  return { type: CHANGE_SELECTED_SCHOOL, school: {value, label} }
 };
 
-export const requestNotificationsSuccess = response => {
-  return {
-    type: FETCH_NOTIFICATIONS_SUCCESS,
-    response
-  }
-};
-
-
-export const changeSelectedSchool = school => {
-  return {
-    type: CHANGE_SELECTED_SCHOOL,
-    school
-  }
-};
-
-export const changeSelectedClass = schoolClass => {
-  return {
-    type: CHANGE_SELECTED_CLASS,
-    class: schoolClass
-  }
+export const changeSelectedClass = (value, label) => {
+  return { type: CHANGE_SELECTED_CLASS, class: {value, label} }
 };
 
 export const setDeviceId = (id) => {
-  return {
-    type: SET_DEVICE_ID,
-    id
-  }
+  return { type: SET_DEVICE_ID, id }
+};
+
+export const setTheme = (theme) => {
+  return { type: SET_THEME, theme }
 };
 
 export const requestFailed = (error) => {
-  return {
-    type: REQUEST_FAILED,
-    error
-  }
+  return { type: REQUEST_FAILED, error}
 };
 
 
-export const fetchNotifications = dispatch => {
-  dispatch(requestNotifications());
-  fetch(`${host}/user/notification`)
+export const requestFeature = () => {
+  return { type: FETCH_FEATURES_REQUEST }
+};
+
+export const requestFeatureSuccess = features => {
+  return { type: FETCH_FEATURE_SUCCESS, features}
+};
+
+export const requestFeatureFailed = error => {
+  return { type: FETCH_FEATURE_FAILURE, error}
+};
+
+
+export const fetchFeatures = dispatch => {
+  dispatch(requestFeature());
+  fetch(`${host}/user/feature`)
     .then(res => res.json())
-    .then(json => dispatch(requestNotificationsSuccess(json)))
-    .catch(error => dispatch(requestNotificationsFailed(error)))
+    .then(json => dispatch(requestFeatureSuccess(json)))
+    .catch(error => dispatch(requestFeatureFailed(error)))
 };
 
 export const fetchSchools = (dispatch) => {
   return new Promise((resolve, reject) => {
-    fetch(`${host}/schedule`)
+    fetch(`${host}/school`)
       .then(res => res.json())
       .then(json => resolve(json))
       .catch(error => dispatch(requestFailed(error)))
@@ -83,14 +75,14 @@ export const fetchSchools = (dispatch) => {
 
 export const fetchClasses = (dispatch, schoolId) => {
   return new Promise((resolve, reject) => {
-    fetch(`${host}/schedule/${schoolId}`)
+    fetch(`${host}/school/${schoolId}`)
       .then(res => res.json())
       .then(json => resolve(json))
       .catch(error => dispatch(requestFailed(error)))
   });
 };
 
-export const postFeedback = (type, description, classId) => {
+export const postFeedback = async (type, description, classId) => {
   return new Promise((resolve, reject) => {
     fetch(`${host}/user/feedback`, {
       method: 'POST',

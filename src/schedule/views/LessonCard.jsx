@@ -6,10 +6,13 @@ import {
 } from 'react-native';
 import moment from 'moment';
 
+import Line from '../../views/HorizontalLine';
+
 
 export default ({periodStart, periodEnd, shortName, fullName, classRoom, teacherName, group, displayLine = true}) => {
+  let isCurrent = moment().isSameOrAfter(moment(periodStart)) && moment().isSameOrBefore(moment(periodEnd));
   return (
-    <View>
+    <View style={isCurrent ? {backgroundColor: 'orange'} : {}}>
       <View style={styles.container}>
         <View style={styles.leftContainer}>
           <Text style={styles.fromHour}>{moment(periodStart).format('HH:mm')}</Text>
@@ -19,7 +22,7 @@ export default ({periodStart, periodEnd, shortName, fullName, classRoom, teacher
           style={{
             flex: 0.4,
             borderLeftWidth: 1,
-            borderLeftColor: 'grey',
+            borderLeftColor: 'orange',
           }}
         />
         <View style={styles.rightContainer}>
@@ -30,9 +33,7 @@ export default ({periodStart, periodEnd, shortName, fullName, classRoom, teacher
           </View>}
         </View>
       </View>
-      {displayLine && <View style={styles.containerStyle}>
-        <View style={styles.dividerStyle} />
-      </View>}
+      {displayLine && <Line/>}
     </View>
   )
 }
@@ -55,17 +56,18 @@ const styles = StyleSheet.create({
     justifyContent: 'center'
   },
   rightContainer: {
-    flex: 3,
-    textAlign: 'center'
+    flex: 4,
+    textAlign: 'center',
+    justifyContent: 'center'
   },
   bottomTextWrapper: {
     paddingTop: 2,
     flexDirection: 'row',
     justifyContent: 'space-between'
   },
-
   textDetails: {
-    textAlign: 'right'
+    textAlign: 'right',
+    color: 'grey'
   },
   fromHour: {
     color: 'black',
@@ -79,19 +81,8 @@ const styles = StyleSheet.create({
   },
   fullName: {
     paddingBottom: 2,
-    fontSize: 13,
+    fontSize: 14,
     fontWeight: '500',
     textAlign: 'left'
-  },
-
-  containerStyle: {
-    width: '100%',
-    height: 1,
-    backgroundColor: 'rgb(255,255,255)',
-  },
-  dividerStyle: {
-    width: '100%',
-    height: '100%',
-    backgroundColor: 'rgb(220,220,223)',
-  },
+  }
 });

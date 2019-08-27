@@ -23,18 +23,17 @@ const styles = StyleSheet.create({
     margin: 20
   },
   imageContainer: {
-    padding: 20,
     flex: 1
   },
   topInnerContainer: {
-    flex: 1,
-    margin: 20
+    flex: 1.6,
   },
   title: {
     fontSize: 20,
     margin: 20,
     fontWeight: '500',
-    textAlign: 'center'
+    textAlign: 'center',
+    color: 'orange'
   },
   description: {
     fontSize: 15,

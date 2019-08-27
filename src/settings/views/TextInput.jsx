@@ -2,13 +2,13 @@ import React from 'react';
 import { TextInput, Text, StyleSheet, View } from 'react-native';
 
 
-export default ({placeholder, description, onChange, value, multiline = false}) => {
+export default ({placeholder, description, onChange, value, multiline = false, style = {}}) => {
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, style]}>
       {description.length > 0 && <Text style={styles.description}>{description}</Text>}
       <TextInput
         multiline={multiline}
-        style={[styles.input, (multiline ? {height: 100} : {})]}
+        style={[styles.input, (multiline ? {height: 120} : {})]}
         placeholder={placeholder}
         onChangeText={value => onChange(value)}
         value={value}
@@ -26,11 +26,11 @@ const styles = StyleSheet.create({
     marginBottom: 10
   },
   input: {
-    height: 40,
-    padding: 10,
+    height: 45,
+    padding: 15,
     borderColor: 'black',
-    borderWidth: 1,
-    borderRadius: 15
+    borderWidth: 2,
+    borderRadius: 20
   },
   description: {
 

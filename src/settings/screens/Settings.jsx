@@ -1,20 +1,16 @@
 import React from 'react'
 import { ScrollView, View, Text, TouchableOpacity, Platform, RefreshControl } from 'react-native';
-import Icon from "react-native-vector-icons/AntDesign";
+import Icon from "react-native-vector-icons/MaterialCommunityIcons";
+import Icon1 from "react-native-vector-icons/Entypo";
 import { connect } from 'react-redux'
-import {
-  SettingsDividerShort,
-  SettingsDividerLong,
-  SettingsEditText,
-  SettingsCategoryHeader,
-  SettingsSwitch,
-  SettingsPicker
-} from "react-native-settings-components";
 
-import {fetchSchools, fetchClasses} from "../actions";
+import Line from '../../views/HorizontalLine';
+import CategoryHeader from '../views/CategoryHeader';
+import {fetchSchools, fetchClasses, setTheme, changeSelectedGroup} from "../actions";
 import {changeSelectedClass, changeSelectedSchool} from "../actions";
-import NotificationCard from '../views/NotificationCard';
-import {fetchNotifications} from "../actions";
+import NotificationCard from '../views/FeatureView';
+import ValuePicker from '../views/ValuePicker';
+import ValueSwitch from '../views/ValueSwitcher';
 
 
 class Settings extends React.Component {
@@ -22,27 +18,33 @@ class Settings extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      school: [],
-      classes: []
+      schools: [],
+      classes: [],
+      groups: [
+        {label: '1. skupina', value: 1},
+        {label: '2. skupina', value: 2}
+      ]
     }
   }
 
   static navigationOptions = ({ navigation }) => {
     return {
-      style: { shadowColor: 'transparent' },
+      headerStyle: {
+        //borderBottomWidth: 0
+      },
       headerTitle: 'Vec',
       headerRight: (
         <TouchableOpacity
           style={{margin: 10}}
           onPress={() => {navigation.getParam('goToNotification')()}}>
-          <Icon name="infocirlceo" size={22} color={'black'} />
+          <Icon name="information" size={22} color={'black'} />
         </TouchableOpacity>
       ),
       headerLeft: (
         <TouchableOpacity
           style={{margin: 10}}
           onPress={() => {navigation.getParam('goToReport')()}}>
-          <Icon name="message1" size={22} color={'black'} />
+          <Icon name="chat-processing" size={22} color={'black'} />
         </TouchableOpacity>
       ),
     };
@@ -62,7 +64,6 @@ class Settings extends React.Component {
 
   onRefresh = async () => {
     await this.getSchools();
-    fetchNotifications(this.props.dispatch);
   };
 
   getSchools = async () => {
@@ -82,55 +83,86 @@ class Settings extends React.Component {
   };
 
   render() {
-    const {selectedSchool, selectedClass} = this.props.settings;
-    const {notifications} = this.props.notification;
+    const {selectedSchool, selectedClass, selectedGroup} = this.props.settings;
+
     return (
       <ScrollView
         style={{flex: 1}}
         refreshControl={
           <RefreshControl
-            refreshing={this.props.settings.isLoading || this.props.notification.isLoading}
+            refreshing={this.props.settings.isLoading}
             onRefresh={this.onRefresh}
           />
         }>
-        <SettingsCategoryHeader
+        <CategoryHeader
           title={"Nastavitve"}
-          textStyle={Platform.OS === "android" ? { color: colors.monza } : null}
+          titleStyle={{color: 'grey'}}
         />
-        <SettingsDividerShort />
-        <SettingsPicker
-          title="Sola"
-          dialogDescription={"Izberi solo."}
-          options={this.state.schools}
-          onValueChange={async value => {
+        <Line/>
+        <ValuePicker
+          displayTopLine={false}
+          displayBottomLine={false}
+          items={this.state.schools}
+          titleColor='white'
+          backgroundColor='orange'
+          selectionColor = 'orange'
+          listTextColor = 'black'
+          closeButton={() => <Icon1 name="cross" size={22} color={'white'} />}
+          onValueChange={async (value, label) => {
+            this.props.dispatch(changeSelectedSchool(value, label));
             await this.getClasses(value);
-            this.props.dispatch(changeSelectedSchool(value));
           }}
-          value={selectedSchool}
-          styleModalButtonsText={{ color: colors.monza }}
-        />
-        <SettingsDividerShort />
-        <SettingsPicker
-          title="Razred"
-          dialogDescription={"Izberi razred."}
-          options={this.state.classes}
-          onValueChange={async value => {
-            this.props.dispatch(changeSelectedClass(value))
+          value={selectedSchool.label}
+          title={'Sola'}/>
+        <ValuePicker
+          displayTopLine={true}
+          displayBottomLine={false}
+          items={this.state.classes}
+          titleColor='white'
+          backgroundColor='orange'
+          selectionColor = 'orange'
+          listTextColor = 'black'
+          closeButton={() => <Icon1 name="cross" size={22} color={'white'} />}
+          onValueChange={async (value, label) => {
+            this.props.dispatch(changeSelectedClass(value, label))
           }}
-          value={selectedClass}
-          styleModalButtonsText={{ color: colors.monza }}
+          value={selectedClass.label}
+          title={'Razred'}/>
+        <ValuePicker
+          displayTopLine={true}
+          displayBottomLine={false}
+          items={this.state.groups}
+          titleColor='white'
+          backgroundColor='orange'
+          selectionColor = 'orange'
+          listTextColor = 'black'
+          closeButton={() => <Icon1 name="cross" size={22} color={'white'} />}
+          onValueChange={async (value, label) => {
+            this.props.dispatch(changeSelectedGroup(value, label))
+          }}
+          value={selectedGroup.label}
+          title={'Skupina'}/>
+        <ValueSwitch
+          switchColor={'black'}
+          bcgColor={'orange'}
+          displayTopLine={true}
+          displayBottomLine={false}
+          title={'Dark mode'}
+          onValueChange={value => value ? this.props.dispatch(setTheme('dark')) : this.props.dispatch(setTheme('light'))}
+          value={this.props.settings.theme === 'dark'}/>
+        <CategoryHeader
+          title={"Glasovanje"}
+          titleStyle={{color: 'grey'}}
         />
-        <SettingsCategoryHeader
-          title={"Obvestila"}
-          textStyle={Platform.OS === "android" ? { color: colors.monza } : null}
-        />
-        <SettingsDividerShort />
-        {notifications.map((ele, index) => (
+        <Line/>
+        {this.props.features.map((ele, index) => (
           <NotificationCard
             key={index}
+            displayTopLine={false}
+            displayBottomLine={index+1 !== this.props.features.length}
             title={ele.title}
-            description={ele.description}
-            displayLine={index+1 !== notifications.length}
+            votes={ele.votes}
+            displayLine={index+1 !== this.props.features.length}
             date={ele.date}/>
         ))}
       </ScrollView>
@@ -139,15 +171,6 @@ class Settings extends React.Component {
 }
 
 export default connect(state => ({
-  settings: state.settings.settings,
-  notification: state.settings.notification
+  settings: state.settings,
+  features: state.settings.features
 }))(Settings);
-
-
-const colors = {
-  white: "#FFFFFF",
-  monza: "#C70039",
-  switchEnabled: "#C70039",
-  switchDisabled: "#efeff3",
-  blueGem: "#27139A",
-};
