@@ -1,5 +1,7 @@
 # [SCNG](http://www.scng.si) Mobile App
 
+![Mobile app preview](https://i.ibb.co/vwKCcXQ/header-phone.png)
+
 ### Available Scripts
 
 In the project directory, you can run:
